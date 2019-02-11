@@ -27,8 +27,10 @@ const styles = StyleSheet.create({
     height: height / 4,
   },
   name: {
-    fontSize: 55,
-    color: '#fff',
+    marginTop: 26,
+    fontSize: height / 17,
+    color: '#D8D8D8',
+    fontWeight: '300',
     fontFamily: 'CeraGR-Thin',
   },
 });
@@ -44,7 +46,7 @@ export default class SplashScreen extends Component {
         >
           <View style={styles.logoContainer}>
             <Image style={styles.logo} source={require('../../../assets/icons/logo.png')} />
-            <Text style={styles.name}>sdfds</Text>
+            <Text style={styles.name}>HOROSKOPES</Text>
           </View>
         </ImageBackground>
       </SafeAreaView>
