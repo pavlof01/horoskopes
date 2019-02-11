@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 55,
     color: '#fff',
-    fontFamily: 'Cera-GR-Thin',
+    fontFamily: 'CeraGR-Thin',
   },
 });
 
