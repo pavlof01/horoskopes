@@ -40,10 +40,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		CE815C8971E4433DB8AF30FA /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A15C7B42C34C1180D495B4 /* libRNGestureHandler.a */; };
-<<<<<<< HEAD
-=======
 		EC7BEF41D415408FB9A3113E /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FC02AEF3E845E0903BCAB1 /* libBVLinearGradient.a */; };
->>>>>>> splash-screen
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
@@ -287,53 +284,34 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-<<<<<<< HEAD
-		844AC8E92211B10000160BEB /* PBXContainerItemProxy */ = {
-=======
 		844AC77D2211A07800160BEB /* PBXContainerItemProxy */ = {
->>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EDEBC6D6214B3E7000DD5AC8;
 			remoteInfo = jsi;
 		};
-<<<<<<< HEAD
-		844AC8EB2211B10000160BEB /* PBXContainerItemProxy */ = {
-=======
 		844AC77F2211A07800160BEB /* PBXContainerItemProxy */ = {
->>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EDEBC73B214B45A300DD5AC8;
 			remoteInfo = jsiexecutor;
 		};
-<<<<<<< HEAD
-		844AC8ED2211B10000160BEB /* PBXContainerItemProxy */ = {
-=======
 		844AC7812211A07800160BEB /* PBXContainerItemProxy */ = {
->>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = ED296FB6214C9A0900B7C4FE;
 			remoteInfo = "jsi-tvOS";
 		};
-<<<<<<< HEAD
-		844AC8EF2211B10000160BEB /* PBXContainerItemProxy */ = {
-=======
 		844AC7832211A07800160BEB /* PBXContainerItemProxy */ = {
->>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = ED296FEE214C9CF800B7C4FE;
 			remoteInfo = "jsiexecutor-tvOS";
 		};
-<<<<<<< HEAD
-		844AC8F42211B10000160BEB /* PBXContainerItemProxy */ = {
-=======
 		844AC78B2211A07800160BEB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D5770251190E4CC9B4B3273F /* BVLinearGradient.xcodeproj */;
@@ -349,7 +327,6 @@
 			remoteInfo = "BVLinearGradient-tvOS";
 		};
 		844AC7902211A07800160BEB /* PBXContainerItemProxy */ = {
->>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 7B53ADBD54384212BFD711B6 /* RNGestureHandler.xcodeproj */;
 			proxyType = 2;
@@ -567,17 +544,10 @@
 				2DF0FFE52056DD460020B375 /* libthird-party.a */,
 				2DF0FFE72056DD460020B375 /* libdouble-conversion.a */,
 				2DF0FFE92056DD460020B375 /* libdouble-conversion.a */,
-<<<<<<< HEAD
-				844AC8EA2211B10000160BEB /* libjsi.a */,
-				844AC8EC2211B10000160BEB /* libjsiexecutor.a */,
-				844AC8EE2211B10000160BEB /* libjsi-tvOS.a */,
-				844AC8F02211B10000160BEB /* libjsiexecutor-tvOS.a */,
-=======
 				844AC77E2211A07800160BEB /* libjsi.a */,
 				844AC7802211A07800160BEB /* libjsiexecutor.a */,
 				844AC7822211A07800160BEB /* libjsi-tvOS.a */,
 				844AC7842211A07800160BEB /* libjsiexecutor-tvOS.a */,
->>>>>>> splash-screen
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -656,12 +626,8 @@
 				00E356EF1AD99517003FC87E /* horoskopesTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-<<<<<<< HEAD
-				844AC8C32211B0FF00160BEB /* Recovered References */,
-=======
 				172142F3B7BA4F52919758FF /* Resources */,
 				844AC7572211A07400160BEB /* Recovered References */,
->>>>>>> splash-screen
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -679,28 +645,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
-		844AC8C32211B0FF00160BEB /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				63A15C7B42C34C1180D495B4 /* libRNGestureHandler.a */,
-=======
 		844AC7572211A07400160BEB /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				63A15C7B42C34C1180D495B4 /* libRNGestureHandler.a */,
 				40FC02AEF3E845E0903BCAB1 /* libBVLinearGradient.a */,
->>>>>>> splash-screen
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
-		844AC8F12211B10000160BEB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				844AC8F52211B10000160BEB /* libRNGestureHandler.a */,
-=======
 		844AC7852211A07800160BEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,7 +667,6 @@
 			isa = PBXGroup;
 			children = (
 				844AC7912211A07800160BEB /* libRNGestureHandler.a */,
->>>>>>> splash-screen
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -892,11 +844,7 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-<<<<<<< HEAD
-					ProductGroup = 844AC8F12211B10000160BEB /* Products */;
-=======
 					ProductGroup = 844AC7872211A07800160BEB /* Products */;
->>>>>>> splash-screen
 					ProjectRef = 7B53ADBD54384212BFD711B6 /* RNGestureHandler.xcodeproj */;
 				},
 			);
@@ -1135,41 +1083,6 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-<<<<<<< HEAD
-		844AC8EA2211B10000160BEB /* libjsi.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libjsi.a;
-			remoteRef = 844AC8E92211B10000160BEB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		844AC8EC2211B10000160BEB /* libjsiexecutor.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libjsiexecutor.a;
-			remoteRef = 844AC8EB2211B10000160BEB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		844AC8EE2211B10000160BEB /* libjsi-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libjsi-tvOS.a";
-			remoteRef = 844AC8ED2211B10000160BEB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		844AC8F02211B10000160BEB /* libjsiexecutor-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libjsiexecutor-tvOS.a";
-			remoteRef = 844AC8EF2211B10000160BEB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		844AC8F52211B10000160BEB /* libRNGestureHandler.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNGestureHandler.a;
-			remoteRef = 844AC8F42211B10000160BEB /* PBXContainerItemProxy */;
-=======
 		844AC77E2211A07800160BEB /* libjsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1217,7 +1130,6 @@
 			fileType = archive.ar;
 			path = libRNGestureHandler.a;
 			remoteRef = 844AC7902211A07800160BEB /* PBXContainerItemProxy */;
->>>>>>> splash-screen
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
@@ -1369,10 +1281,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1380,10 +1289,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1403,10 +1309,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1414,10 +1317,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1438,10 +1338,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1464,10 +1361,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1497,20 +1391,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1539,20 +1427,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1580,20 +1462,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1621,20 +1497,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
->>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
