@@ -36,6 +36,12 @@ const styles = StyleSheet.create({
 });
 
 export default class SplashScreen extends Component {
+  componentDidMount() {
+    const { navigation } = this.props;
+    /* LOADING IMITATION */
+    setTimeout(() => navigation.navigate('PickYourSign'), 2000);
+  }
+
   render() {
     return (
       <SafeAreaView>
