@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Aquarius",
+    "type": "air"
+  },
+  {
+    "name": "Aries",
+    "type": "fire"
+  },
+  {
+    "name": "Cancer",
+    "type": "water"
+  },
+  {
+    "name": "Capricorn",
+    "type": "earth"
+  },
+  {
+    "name": "Gemini",
+    "type": "air"
+  },
+  {
+    "name": "Leo",
+    "type": "fire"
+  },
+  {
+    "name": "Libra",
+    "type": "air"
+  },
+  {
+    "name": "Pisces",
+    "type": "water"
+  },
+  {
+    "name": "Sagittarius",
+    "type": "fire"
+  },
+  {
+    "name": "Scorpio",
+    "type": "water"
+  },
+  {
+    "name": "Taurus",
+    "type": "earth"
+  },
+  {
+    "name": "Virgo",
+    "type": "earth"
+  }
+]
