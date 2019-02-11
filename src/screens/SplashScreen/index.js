@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 55,
-    fontWeight: '300',
     color: '#fff',
+    fontFamily: 'Cera-GR-Thin',
   },
 });
 
