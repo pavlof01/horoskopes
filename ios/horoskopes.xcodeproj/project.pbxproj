@@ -13,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* horoskopesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* horoskopesTests.m */; };
+		0F97D211F9B9410BA96045E1 /* CeraGR-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AE95407F015451AA299DE37 /* CeraGR-Thin.ttf */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
@@ -39,6 +40,10 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		CE815C8971E4433DB8AF30FA /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A15C7B42C34C1180D495B4 /* libRNGestureHandler.a */; };
+<<<<<<< HEAD
+=======
+		EC7BEF41D415408FB9A3113E /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FC02AEF3E845E0903BCAB1 /* libBVLinearGradient.a */; };
+>>>>>>> splash-screen
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
@@ -282,35 +287,69 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+<<<<<<< HEAD
 		844AC8E92211B10000160BEB /* PBXContainerItemProxy */ = {
+=======
+		844AC77D2211A07800160BEB /* PBXContainerItemProxy */ = {
+>>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EDEBC6D6214B3E7000DD5AC8;
 			remoteInfo = jsi;
 		};
+<<<<<<< HEAD
 		844AC8EB2211B10000160BEB /* PBXContainerItemProxy */ = {
+=======
+		844AC77F2211A07800160BEB /* PBXContainerItemProxy */ = {
+>>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EDEBC73B214B45A300DD5AC8;
 			remoteInfo = jsiexecutor;
 		};
+<<<<<<< HEAD
 		844AC8ED2211B10000160BEB /* PBXContainerItemProxy */ = {
+=======
+		844AC7812211A07800160BEB /* PBXContainerItemProxy */ = {
+>>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = ED296FB6214C9A0900B7C4FE;
 			remoteInfo = "jsi-tvOS";
 		};
+<<<<<<< HEAD
 		844AC8EF2211B10000160BEB /* PBXContainerItemProxy */ = {
+=======
+		844AC7832211A07800160BEB /* PBXContainerItemProxy */ = {
+>>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = ED296FEE214C9CF800B7C4FE;
 			remoteInfo = "jsiexecutor-tvOS";
 		};
+<<<<<<< HEAD
 		844AC8F42211B10000160BEB /* PBXContainerItemProxy */ = {
+=======
+		844AC78B2211A07800160BEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5770251190E4CC9B4B3273F /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		844AC78D2211A07800160BEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5770251190E4CC9B4B3273F /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
+		};
+		844AC7902211A07800160BEB /* PBXContainerItemProxy */ = {
+>>>>>>> splash-screen
 			isa = PBXContainerItemProxy;
 			containerPortal = 7B53ADBD54384212BFD711B6 /* RNGestureHandler.xcodeproj */;
 			proxyType = 2;
@@ -349,12 +388,15 @@
 		2D02E47B1E0B4A5D006451C7 /* horoskopes-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "horoskopes-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* horoskopes-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "horoskopes-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		40FC02AEF3E845E0903BCAB1 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		63A15C7B42C34C1180D495B4 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7B53ADBD54384212BFD711B6 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9AE95407F015451AA299DE37 /* CeraGR-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CeraGR-Thin.ttf"; path = "../assets/fonts/CeraGR-Thin.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		D5770251190E4CC9B4B3273F /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -386,6 +428,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				CE815C8971E4433DB8AF30FA /* libRNGestureHandler.a in Frameworks */,
+				EC7BEF41D415408FB9A3113E /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,12 +567,27 @@
 				2DF0FFE52056DD460020B375 /* libthird-party.a */,
 				2DF0FFE72056DD460020B375 /* libdouble-conversion.a */,
 				2DF0FFE92056DD460020B375 /* libdouble-conversion.a */,
+<<<<<<< HEAD
 				844AC8EA2211B10000160BEB /* libjsi.a */,
 				844AC8EC2211B10000160BEB /* libjsiexecutor.a */,
 				844AC8EE2211B10000160BEB /* libjsi-tvOS.a */,
 				844AC8F02211B10000160BEB /* libjsiexecutor-tvOS.a */,
+=======
+				844AC77E2211A07800160BEB /* libjsi.a */,
+				844AC7802211A07800160BEB /* libjsiexecutor.a */,
+				844AC7822211A07800160BEB /* libjsi-tvOS.a */,
+				844AC7842211A07800160BEB /* libjsiexecutor-tvOS.a */,
+>>>>>>> splash-screen
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		172142F3B7BA4F52919758FF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9AE95407F015451AA299DE37 /* CeraGR-Thin.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -576,6 +634,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				7B53ADBD54384212BFD711B6 /* RNGestureHandler.xcodeproj */,
+				D5770251190E4CC9B4B3273F /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -597,7 +656,12 @@
 				00E356EF1AD99517003FC87E /* horoskopesTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+<<<<<<< HEAD
 				844AC8C32211B0FF00160BEB /* Recovered References */,
+=======
+				172142F3B7BA4F52919758FF /* Resources */,
+				844AC7572211A07400160BEB /* Recovered References */,
+>>>>>>> splash-screen
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -615,18 +679,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		844AC8C32211B0FF00160BEB /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				63A15C7B42C34C1180D495B4 /* libRNGestureHandler.a */,
+=======
+		844AC7572211A07400160BEB /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				63A15C7B42C34C1180D495B4 /* libRNGestureHandler.a */,
+				40FC02AEF3E845E0903BCAB1 /* libBVLinearGradient.a */,
+>>>>>>> splash-screen
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		844AC8F12211B10000160BEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				844AC8F52211B10000160BEB /* libRNGestureHandler.a */,
+=======
+		844AC7852211A07800160BEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				844AC78C2211A07800160BEB /* libBVLinearGradient.a */,
+				844AC78E2211A07800160BEB /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		844AC7872211A07800160BEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				844AC7912211A07800160BEB /* libRNGestureHandler.a */,
+>>>>>>> splash-screen
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -752,6 +840,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 844AC7852211A07800160BEB /* Products */;
+					ProjectRef = D5770251190E4CC9B4B3273F /* BVLinearGradient.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -800,7 +892,11 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+<<<<<<< HEAD
 					ProductGroup = 844AC8F12211B10000160BEB /* Products */;
+=======
+					ProductGroup = 844AC7872211A07800160BEB /* Products */;
+>>>>>>> splash-screen
 					ProjectRef = 7B53ADBD54384212BFD711B6 /* RNGestureHandler.xcodeproj */;
 				},
 			);
@@ -1039,6 +1135,7 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+<<<<<<< HEAD
 		844AC8EA2211B10000160BEB /* libjsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1072,6 +1169,55 @@
 			fileType = archive.ar;
 			path = libRNGestureHandler.a;
 			remoteRef = 844AC8F42211B10000160BEB /* PBXContainerItemProxy */;
+=======
+		844AC77E2211A07800160BEB /* libjsi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsi.a;
+			remoteRef = 844AC77D2211A07800160BEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		844AC7802211A07800160BEB /* libjsiexecutor.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsiexecutor.a;
+			remoteRef = 844AC77F2211A07800160BEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		844AC7822211A07800160BEB /* libjsi-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libjsi-tvOS.a";
+			remoteRef = 844AC7812211A07800160BEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		844AC7842211A07800160BEB /* libjsiexecutor-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libjsiexecutor-tvOS.a";
+			remoteRef = 844AC7832211A07800160BEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		844AC78C2211A07800160BEB /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 844AC78B2211A07800160BEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		844AC78E2211A07800160BEB /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 844AC78D2211A07800160BEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		844AC7912211A07800160BEB /* libRNGestureHandler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGestureHandler.a;
+			remoteRef = 844AC7902211A07800160BEB /* PBXContainerItemProxy */;
+>>>>>>> splash-screen
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
@@ -1097,6 +1243,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				0F97D211F9B9410BA96045E1 /* CeraGR-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,7 +1277,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1222,6 +1369,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1229,6 +1380,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
+=======
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+>>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1248,6 +1403,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1255,6 +1414,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
+=======
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+>>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1275,6 +1438,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1297,6 +1464,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = horoskopes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1326,12 +1497,20 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
+=======
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+>>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1360,12 +1539,20 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
+=======
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+>>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1393,12 +1580,20 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
+=======
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+>>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1426,12 +1621,20 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+<<<<<<< HEAD
+=======
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+>>>>>>> splash-screen
 				);
 				INFOPLIST_FILE = "horoskopes-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
+=======
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+>>>>>>> splash-screen
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
