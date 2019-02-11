@@ -1,13 +1,16 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import App from './App';
+import SplashScreen from './screens/SplashScreen';
 
 const AppNavigator = createStackNavigator(
   {
-    App,
+    SplashScreen: {
+      screen: SplashScreen,
+    },
   },
   {
-    initialRouteName: 'App',
+    headerMode: 'none ',
+    initialRouteName: 'SplashScreen',
   },
 );
 
