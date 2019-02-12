@@ -43,6 +43,13 @@ const styles = StyleSheet.create({
 });
 
 export default class PickYourSign extends Component {
+  constructor() {
+    super();
+    this.state = {
+      active: null,
+    };
+  }
+
   header = () => (
     <View style={styles.header}>
       <Text style={styles.headerText}>
@@ -54,7 +61,11 @@ export default class PickYourSign extends Component {
     </View>
   )
 
-  renderItem = ({ item }) => <ZodiacItem data={item} />
+  pickSign = sign => this.setState({ active: sign })
+
+  renderItem = ({ item }) => (
+    <ZodiacItem pickSign={this.pickSign} active={this.state.active} data={item} />
+  )
 
   keyExtractor = item => `${item.name}`
 
@@ -68,6 +79,7 @@ export default class PickYourSign extends Component {
         >
           <FlatList
             contentContainerStyle={styles.flatList}
+            extraData={this.state}
             ListHeaderComponent={this.header}
             keyExtractor={this.keyExtractor}
             data={zodiacs}
