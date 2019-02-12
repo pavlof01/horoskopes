@@ -35,10 +35,11 @@ const styles = StyleSheet.create({
 
 export default class Continue extends Component {
   render() {
-    const { bottom } = this.props;
+    const { bottom, onPress } = this.props;
+    const goNext = () => onPress();
     return (
       <Animated.View style={[styles.container, { bottom }]}>
-        <TouchableOpacity onPress={() => console.warn('object')} style={[styles.touchableOpacity]}>
+        <TouchableOpacity onPress={goNext} style={[styles.touchableOpacity]}>
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}

@@ -2,6 +2,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import SplashScreen from './screens/SplashScreen';
 import PickYourSign from './screens/PickYourSign';
+import Home from './screens/Home';
 
 const AppNavigator = createStackNavigator(
   {
@@ -10,6 +11,9 @@ const AppNavigator = createStackNavigator(
     },
     PickYourSign: {
       screen: PickYourSign,
+    },
+    Home: {
+      screen: Home,
     },
   },
   {

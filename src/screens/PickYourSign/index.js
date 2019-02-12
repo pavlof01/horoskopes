@@ -75,6 +75,8 @@ export default class PickYourSign extends Component {
     }).start();
   }
 
+  goNext = () => this.props.navigation.navigate('Home')
+
   renderItem = ({ item }) => (
     <ZodiacItem pickSign={this.pickSign} active={this.state.active} data={item} />
   )
@@ -100,7 +102,7 @@ export default class PickYourSign extends Component {
             numColumns={3}
             columnWrapperStyle={styles.columnWrapperStyle}
           />
-          <ContinueButton bottom={bottomBtn} />
+          <ContinueButton onPress={this.goNext} bottom={bottomBtn} />
         </ImageBackground>
       </SafeAreaView>
     );
