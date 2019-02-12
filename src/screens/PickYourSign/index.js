@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ZodiacItem from '../../components/zodiacItem';
 import zodiacs from '../../../zodiacs.json';
+import ContinueButton from '../../components/buttons/continue';
 
 const { height } = Dimensions.get('window');
 
@@ -87,6 +88,7 @@ export default class PickYourSign extends Component {
             numColumns={3}
             columnWrapperStyle={styles.columnWrapperStyle}
           />
+          <ContinueButton />
         </ImageBackground>
       </SafeAreaView>
     );
