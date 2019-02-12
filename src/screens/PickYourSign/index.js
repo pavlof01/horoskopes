@@ -8,6 +8,7 @@ import {
   Dimensions,
   FlatList,
   Animated,
+  AsyncStorage,
 } from 'react-native';
 import ZodiacItem from '../../components/zodiacItem';
 import zodiacs from '../../../zodiacs.json';
@@ -64,8 +65,10 @@ export default class PickYourSign extends Component {
     </View>
   )
 
-  pickSign = (sign) => {
-    this.setState({ active: sign });
+  pickSign = async (sign) => {
+    this.setState({ active: sign }, () => {
+      AsyncStorage.setItem('sign', this.state.active);
+    });
     Animated.timing(this.state.bottomBtn, {
       toValue: height / 30,
       duration: 200,
