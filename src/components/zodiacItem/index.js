@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
 });
 
 export default class ZodiacItem extends Component {
+  /**
+   * maybe would be better if combine getZodiacBackground and getZodiacIcon
+   * in one func that return icon with background.
+   * and translate it to utils side
+   */
   getZodiacBackground = (type) => {
     switch (type) {
       case 'air':
