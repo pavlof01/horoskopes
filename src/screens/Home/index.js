@@ -9,6 +9,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import getZodiacIcon from '../../utils';
+import SignStat from '../../components/signStatistic';
 
 const { height } = Dimensions.get('window');
 
@@ -61,14 +62,25 @@ const styles = StyleSheet.create({
     borderRadius: height / 5,
     bottom: -(height / 5) / 2,
   },
-  one: {
-
-  },
   two: {
     width: height / 4,
     height: height / 4,
     borderRadius: height / 4,
     bottom: -(height / 4) / 2,
+  },
+  signUserContainer: {
+    marginTop: height / 7,
+  },
+  userSignName: {
+    color: '#ff7e42',
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: height / 15,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  signStatistic: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
 
@@ -94,6 +106,7 @@ export default class Home extends Component {
   }
 
   render() {
+    const { sign } = this.state;
     return (
       <View style={styles.safeAreaView}>
         <View style={styles.header}>
@@ -103,7 +116,7 @@ export default class Home extends Component {
             source={require('../../../assets/img/bg-home-header.png')}
           />
           <View style={styles.userSignContainer}>{this.userSign()}</View>
-          <View style={[styles.circle, styles.one]} />
+          <View style={styles.circle} />
           <View style={[styles.circle, styles.two]} />
           <Text style={styles.title}>My Board</Text>
           <TouchableOpacity style={styles.settingsIconContainer}>
@@ -112,6 +125,14 @@ export default class Home extends Component {
               source={require('../../../assets/icons/settings.png')}
             />
           </TouchableOpacity>
+        </View>
+        <View style={styles.signUserContainer}>
+          <Text style={styles.userSignName}>{sign}</Text>
+          <View style={styles.signStatistic}>
+            <SignStat rate={2} color="#f5c970" text="Love" />
+            <SignStat rate={3} color="#52e092" text="Health" />
+            <SignStat rate={0} color="#ff637e" text="Career" />
+          </View>
         </View>
       </View>
     );
