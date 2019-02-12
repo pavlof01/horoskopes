@@ -3,18 +3,20 @@ import {
   Text,
   StyleSheet,
   View,
-  SafeAreaView,
   ImageBackground,
   Dimensions,
   FlatList,
   Animated,
   AsyncStorage,
+  Platform,
 } from 'react-native';
 import ZodiacItem from '../../components/zodiacItem';
 import zodiacs from '../../../zodiacs.json';
 import ContinueButton from '../../components/buttons/continue';
 
 const { height } = Dimensions.get('window');
+
+const isAndroid = Platform.OS === 'android';
 
 const styles = StyleSheet.create({
   background: {
@@ -23,6 +25,7 @@ const styles = StyleSheet.create({
   },
   flatList: {
     padding: '5%',
+    paddingTop: isAndroid ? 10 : 30,
   },
   columnWrapperStyle: {
     justifyContent: 'space-between',
@@ -86,7 +89,7 @@ export default class PickYourSign extends Component {
   render() {
     const { bottomBtn } = this.state;
     return (
-      <SafeAreaView>
+      <View>
         <ImageBackground
           resizeMode="cover"
           source={require('../../../assets/img/bg-pick-your-zodiac.png')}
@@ -104,7 +107,7 @@ export default class PickYourSign extends Component {
           />
           <ContinueButton onPress={this.goNext} bottom={bottomBtn} />
         </ImageBackground>
-      </SafeAreaView>
+      </View>
     );
   }
 }

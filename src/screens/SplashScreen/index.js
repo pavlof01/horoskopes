@@ -7,6 +7,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Dimensions,
+  StatusBar,
 } from 'react-native';
 
 const { height } = Dimensions.get('window');
@@ -44,7 +45,8 @@ export default class SplashScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView>
+      <View>
+        <StatusBar barStyle="light-content" />
         <ImageBackground
           style={styles.background}
           resizeMode="cover"
@@ -55,7 +57,7 @@ export default class SplashScreen extends Component {
             <Text style={styles.name}>HOROSKOPES</Text>
           </View>
         </ImageBackground>
-      </SafeAreaView>
+      </View>
     );
   }
 }
