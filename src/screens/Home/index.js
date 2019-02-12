@@ -8,8 +8,11 @@ import {
   TouchableOpacity,
   AsyncStorage,
 } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import getZodiacIcon from '../../utils';
 import SignStat from '../../components/signStatistic';
+
+const DAYS_HOROSKOPES = ['Yesterday', 'Today', 'Tomorrow', 'Weekly', 'Monthly', 'Yearly'];
 
 const { height } = Dimensions.get('window');
 
@@ -82,6 +85,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  flatListItem: {
+    color: '#fff',
+    paddingHorizontal: 15,
+    fontFamily: 'Poppins-Medium',
+    fontSize: height / 35,
+  },
 });
 
 export default class Home extends Component {
@@ -104,6 +113,8 @@ export default class Home extends Component {
     }
     return null;
   }
+
+  keyExtractor = item => `${item}`
 
   render() {
     const { sign } = this.state;
@@ -134,6 +145,13 @@ export default class Home extends Component {
             <SignStat rate={0} color="#ff637e" text="Career" />
           </View>
         </View>
+        <FlatList
+          style={{ marginTop: 30 }}
+          keyExtractor={this.keyExtractor}
+          data={DAYS_HOROSKOPES}
+          renderItem={item => <Text style={styles.flatListItem}>{item.item}</Text>}
+          horizontal
+        />
       </View>
     );
   }
