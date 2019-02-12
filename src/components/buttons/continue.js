@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     borderRadius: 51,
     position: 'absolute',
     alignSelf: 'center',
-    bottom: height / 30,
   },
   linearGradient: {
     width: width / 1.2,
@@ -34,8 +33,9 @@ const styles = StyleSheet.create({
 
 export default class Continue extends Component {
   render() {
+    const { bottom } = this.props;
     return (
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity style={[styles.container, { bottom }]}>
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}

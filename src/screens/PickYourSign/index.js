@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Dimensions,
   FlatList,
+  Animated,
 } from 'react-native';
 import ZodiacItem from '../../components/zodiacItem';
 import zodiacs from '../../../zodiacs.json';
@@ -48,6 +49,7 @@ export default class PickYourSign extends Component {
     super();
     this.state = {
       active: null,
+      bottomBtn: new Animated.Value(-300),
     };
   }
 
@@ -62,7 +64,13 @@ export default class PickYourSign extends Component {
     </View>
   )
 
-  pickSign = sign => this.setState({ active: sign })
+  pickSign = (sign) => {
+    this.setState({ active: sign });
+    Animated.timing(this.state.bottomBtn, {
+      toValue: height / 30,
+      duration: 200,
+    }).start();
+  }
 
   renderItem = ({ item }) => (
     <ZodiacItem pickSign={this.pickSign} active={this.state.active} data={item} />
@@ -71,6 +79,7 @@ export default class PickYourSign extends Component {
   keyExtractor = item => `${item.name}`
 
   render() {
+    const { bottomBtn } = this.state;
     return (
       <SafeAreaView>
         <ImageBackground
@@ -88,7 +97,7 @@ export default class PickYourSign extends Component {
             numColumns={3}
             columnWrapperStyle={styles.columnWrapperStyle}
           />
-          <ContinueButton />
+          <ContinueButton bottom={bottomBtn} />
         </ImageBackground>
       </SafeAreaView>
     );
