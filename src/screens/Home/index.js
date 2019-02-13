@@ -7,10 +7,12 @@ import {
   Dimensions,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import getZodiacIcon from '../../utils';
 import SignStat from '../../components/signStatistic';
+import YourDayCard from '../../components/horoskopesCard';
 
 const DAYS_HOROSKOPES = ['Yesterday', 'Today', 'Tomorrow', 'Weekly', 'Monthly', 'Yearly'];
 
@@ -19,7 +21,6 @@ const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   safeAreaView: {
     backgroundColor: '#000000',
-    flex: 1,
   },
   header: {
     height: height / 3,
@@ -85,6 +86,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  flatList: {
+    marginTop: 30,
+    height: 50,
+  },
   flatListItem: {
     color: '#c6c7cb',
     opacity: 0.5,
@@ -104,6 +109,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignSelf: 'center',
   },
+  cards: {
+    margin: 10,
+    alignItems: 'center',
+  },
 });
 
 export default class Home extends Component {
@@ -112,6 +121,11 @@ export default class Home extends Component {
     this.state = {
       sign: null,
       currentHoroskope: 'Today',
+      cardExpand: {
+        love: false,
+        carrer: false,
+        helth: false,
+      },
     };
   }
 
@@ -149,8 +163,9 @@ export default class Home extends Component {
 
   render() {
     const { sign } = this.state;
+    const { love, carrer, helth } = this.state.cardExpand;
     return (
-      <View style={styles.safeAreaView}>
+      <ScrollView style={styles.safeAreaView}>
         <View style={styles.header}>
           <Image
             style={styles.headerBackground}
@@ -177,13 +192,46 @@ export default class Home extends Component {
           </View>
         </View>
         <FlatList
-          style={{ marginTop: 30 }}
+          style={styles.flatList}
           keyExtractor={this.keyExtractor}
           data={DAYS_HOROSKOPES}
           renderItem={this.renderItem}
           horizontal
         />
-      </View>
+        <View style={styles.cards}>
+          <YourDayCard
+            title="Your Day"
+            isToday
+            body="You’se likely to be on the receiving end of new, a gift or invitation and may even
+            receive news of achievement regarding one or other of the activies. You’se likely to be
+            on the receiving end of new, a gift or invitation ."
+            backgroundImage={require('../../../assets/img/bg-your-day-card.png')}
+          />
+          <YourDayCard
+            title="Your Love"
+            body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
+            backgroundImage={require('../../../assets/img/bg-your-love-card.png')}
+            isExpand={love}
+            backgroundColorForSetOpacity="rgba(254, 194, 204, 0.8)"
+          />
+          <YourDayCard
+            title="Your Career"
+            body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
+            backgroundImage={require('../../../assets/img/bg-your-carrer-card.png')}
+            isExpand={carrer}
+            readMoreBtnColor="#f58204"
+            backgroundColorForSetOpacity="rgba(252, 220, 178, 0.8)"
+          />
+          <YourDayCard
+            title="Your Helth"
+            body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
+            backgroundImage={require('../../../assets/img/bg-your-helth-card.png')}
+            isExpand={helth}
+            readMoreBtnColor="#9553f1"
+            backgroundColorForSetOpacity="rgba(207, 190, 240, 0.8)"
+          />
+        </View>
+      </ScrollView>
     );
   }
 }
