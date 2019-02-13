@@ -145,8 +145,9 @@ export default class Home extends Component {
   setCurrentHoroskope = item => this.setState({ currentHoroskope: item })
 
   expandCard = card => this.setState((state) => {
-    state.cardExpand[card] = true;
-    return state;
+    const newState = state;
+    newState.cardExpand[card] = true;
+    return newState;
   })
 
   renderItem = ({ item }) => {
