@@ -86,10 +86,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   flatListItem: {
-    color: '#fff',
+    color: '#c6c7cb',
+    opacity: 0.5,
     paddingHorizontal: 15,
     fontFamily: 'Poppins-Medium',
     fontSize: height / 35,
+  },
+  isCurrentFlatListItem: {
+    color: '#fff',
+    opacity: 1,
+  },
+  currentFlatListItem: {
+    width: 35,
+    height: 1,
+    borderColor: '#ff7e42',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    alignSelf: 'center',
   },
 });
 
@@ -98,6 +111,7 @@ export default class Home extends Component {
     super();
     this.state = {
       sign: null,
+      currentHoroskope: 'Today',
     };
   }
 
@@ -112,6 +126,23 @@ export default class Home extends Component {
       return getZodiacIcon(sign);
     }
     return null;
+  }
+
+  setCurrentHoroskope = item => this.setState({ currentHoroskope: item })
+
+  renderItem = ({ item }) => {
+    const { currentHoroskope } = this.state;
+    const isCurrent = currentHoroskope === item;
+    return (
+      <TouchableOpacity onPress={() => this.setCurrentHoroskope(item)}>
+        <View>
+          <Text style={[styles.flatListItem, isCurrent ? styles.isCurrentFlatListItem : null]}>
+            {item}
+          </Text>
+          {!isCurrent || <View style={styles.currentFlatListItem} />}
+        </View>
+      </TouchableOpacity>
+    );
   }
 
   keyExtractor = item => `${item}`
@@ -149,7 +180,7 @@ export default class Home extends Component {
           style={{ marginTop: 30 }}
           keyExtractor={this.keyExtractor}
           data={DAYS_HOROSKOPES}
-          renderItem={item => <Text style={styles.flatListItem}>{item.item}</Text>}
+          renderItem={this.renderItem}
           horizontal
         />
       </View>
