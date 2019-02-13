@@ -72,6 +72,7 @@ export default class Day extends Component {
       isExpand,
       readMoreBtnColor,
       backgroundColorForSetOpacity,
+      onExpand,
     } = this.props;
     return (
       <View style={[styles.container, isExpand || isToday ? null : styles.notExpand]}>
@@ -93,7 +94,7 @@ export default class Day extends Component {
             <View
               style={[styles.readMoreContainer, { backgroundColor: backgroundColorForSetOpacity }]}
             >
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => onExpand()}>
                 <Text style={[styles.readMore, { color: readMoreBtnColor }]}>Read More</Text>
               </TouchableOpacity>
             </View>
@@ -109,6 +110,7 @@ Day.defaultProps = {
   isToday: null,
   readMoreBtnColor: null,
   isExpand: null,
+  onExpand: null,
 };
 
 Day.propTypes = {
@@ -119,4 +121,5 @@ Day.propTypes = {
   isExpand: PropTypes.bool,
   readMoreBtnColor: PropTypes.string,
   backgroundColorForSetOpacity: PropTypes.string,
+  onExpand: PropTypes.func,
 };

@@ -144,6 +144,11 @@ export default class Home extends Component {
 
   setCurrentHoroskope = item => this.setState({ currentHoroskope: item })
 
+  expandCard = card => this.setState((state) => {
+    state.cardExpand[card] = true;
+    return state;
+  })
+
   renderItem = ({ item }) => {
     const { currentHoroskope } = this.state;
     const isCurrent = currentHoroskope === item;
@@ -213,6 +218,7 @@ export default class Home extends Component {
             backgroundImage={require('../../../assets/img/bg-your-love-card.png')}
             isExpand={love}
             backgroundColorForSetOpacity="rgba(254, 194, 204, 0.8)"
+            onExpand={() => this.expandCard('love')}
           />
           <YourDayCard
             title="Your Career"
@@ -221,6 +227,7 @@ export default class Home extends Component {
             isExpand={carrer}
             readMoreBtnColor="#f58204"
             backgroundColorForSetOpacity="rgba(252, 220, 178, 0.8)"
+            onExpand={() => this.expandCard('carrer')}
           />
           <YourDayCard
             title="Your Helth"
@@ -229,6 +236,7 @@ export default class Home extends Component {
             isExpand={helth}
             readMoreBtnColor="#9553f1"
             backgroundColorForSetOpacity="rgba(207, 190, 240, 0.8)"
+            onExpand={() => this.expandCard('helth')}
           />
         </View>
       </ScrollView>
