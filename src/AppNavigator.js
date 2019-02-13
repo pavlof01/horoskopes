@@ -1,8 +1,47 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import {
+  createStackNavigator,
+  createAppContainer,
+  createBottomTabNavigator,
+} from 'react-navigation';
+import createBottomBarOptions from './components/bottomBar';
 
 import SplashScreen from './screens/SplashScreen';
 import PickYourSign from './screens/PickYourSign';
 import Home from './screens/Home';
+import Horoscopes from './screens/Horoscopes';
+import Compatibility from './screens/Compatibility';
+import Profile from './screens/Profile';
+
+const Main = createBottomTabNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: createBottomBarOptions(
+      'Home',
+      require('../assets/icons/bottom-menu-icon-home.png'),
+    ),
+  },
+  Horoscopes: {
+    screen: Horoscopes,
+    navigationOptions: createBottomBarOptions(
+      'Horoscopes',
+      require('../assets/icons/bottom-menu-icon-horoskopes.png'),
+    ),
+  },
+  Compatibility: {
+    screen: Compatibility,
+    navigationOptions: createBottomBarOptions(
+      'Compatibility',
+      require('../assets/icons/bottom-menu-icon-compatibility.png'),
+    ),
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: createBottomBarOptions(
+      'Profile',
+      require('../assets/icons/bottom-menu-icon-profile.png'),
+    ),
+  },
+});
 
 const AppNavigator = createStackNavigator(
   {
@@ -13,7 +52,7 @@ const AppNavigator = createStackNavigator(
       screen: PickYourSign,
     },
     Home: {
-      screen: Home,
+      screen: Main,
     },
   },
   {
