@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Text, StyleSheet, View, Image, Dimensions, TouchableOpacity,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import getZodiacIcon from '../../utils';
 
 const { height } = Dimensions.get('window');
@@ -36,13 +37,21 @@ const styles = StyleSheet.create({
 
 export default class ZodiacItem extends Component {
   render() {
-    const { data, pickSign, active } = this.props;
+    const {
+      data, pickSign, active, opacity,
+    } = this.props;
     const onPress = () => pickSign(data.name);
     const isActive = active === data.name;
     return (
       <TouchableOpacity onPress={onPress} style={styles.container}>
         <View
-          style={active === null ? styles.opacity1 : isActive ? styles.opacity1 : styles.opacity05}
+          style={
+            active === null
+              ? styles.opacity1
+              : isActive
+                ? styles.opacity1
+                : opacity || styles.opacity05
+          }
         >
           <View style={styles.backgroundContainer}>
             {getZodiacIcon(data.name)}
@@ -59,3 +68,13 @@ export default class ZodiacItem extends Component {
     );
   }
 }
+
+ZodiacItem.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  pickSign: PropTypes.func.isRequired,
+  active: PropTypes.string,
+  opacity: PropTypes.number,
+};
