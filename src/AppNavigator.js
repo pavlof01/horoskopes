@@ -11,6 +11,7 @@ import Home from './screens/Home';
 import Horoscopes from './screens/Horoscopes';
 import Compatibility from './screens/Compatibility';
 import Profile from './screens/Profile';
+import CompatibilityResult from './screens/Compatibility/compability';
 
 const Main = createBottomTabNavigator({
   Home: {
@@ -53,6 +54,9 @@ const AppNavigator = createStackNavigator(
     },
     Home: {
       screen: Main,
+    },
+    CompatibilityResult: {
+      screen: CompatibilityResult,
     },
   },
   {
