@@ -1,49 +1,61 @@
 [
   {
+    "id": 1,
     "name": "Aquarius",
     "type": "air"
   },
   {
+    "id": 2,
     "name": "Aries",
     "type": "fire"
   },
   {
+    "id": 3,
     "name": "Cancer",
     "type": "water"
   },
   {
+    "id": 4,
     "name": "Capricorn",
     "type": "earth"
   },
   {
+    "id": 5,
     "name": "Gemini",
     "type": "air"
   },
   {
+    "id": 6,
     "name": "Leo",
     "type": "fire"
   },
   {
+    "id": 7,
     "name": "Libra",
     "type": "air"
   },
   {
+    "id": 8,
     "name": "Pisces",
     "type": "water"
   },
   {
+    "id": 9,
     "name": "Sagittarius",
     "type": "fire"
   },
   {
+    "id": 10,
     "name": "Scorpio",
     "type": "water"
   },
   {
+    "id": 11,
     "name": "Taurus",
     "type": "earth"
   },
   {
+    "id": 12,
     "name": "Virgo",
     "type": "earth"
   }
