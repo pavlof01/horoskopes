@@ -125,6 +125,7 @@ export default class Compability extends Component {
 
   checkCompatibility = async () => {
     // await AsyncStorage.setItem('compability', this._carousel.currentIndex);
+    this.props.navigation.navigate('CompatibilityResult');
   }
 
   renderItem = ({ item }) => <ZodiacItem opacity={1} pickSign={() => {}} active="" data={item} />

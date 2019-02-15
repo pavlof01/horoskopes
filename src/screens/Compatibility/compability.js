@@ -1,126 +1,164 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  AsyncStorage,
+  Dimensions,
+} from 'react-native';
+import getZodiacIcon from '../../utils';
+import UserSignWithCircles from '../../components/userSignWithCircles';
+import CircularProgress from '../../components/circularProgress';
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     backgroundColor: '#ecf0f1',
-//     padding: 8,
-//   },
-//   containerCircle: {
-//     width: 100,
-//     height: 100,
-//     borderRadius: 50,
-//     flexDirection: 'row',
-//   },
-//   center: {
-//     backgroundColor: '#261919',
-//     width: 90,
-//     height: 90,
-//     position: 'absolute',
-//     alignSelf: 'center',
-//   },
-//   rightHalf: {
-//     backgroundColor: '#FF813E',
-//     height: '100%',
-//     width: '50%',
-//     borderTopLeftRadius: 50,
-//     borderBottomLeftRadius: 50,
-//   },
-//   leftHalf: {
-//     backgroundColor: '#FF813E',
-//     height: '100%',
-//     width: '50%',
-//     borderTopRightRadius: 50,
-//     borderBottomRightRadius: 50,
-//   },
-// });
+const { height, width } = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    backgroundColor: '#000000',
+  },
+  header: {
+    height: height / 3,
+  },
+  headerBackground: {
+    width: '100%',
+    height: '100%',
+  },
+  backgroundStars: {
+    position: 'absolute',
+    width: '100%',
+    height: height / 1.5,
+    top: '50%',
+    alignSelf: 'center',
+  },
+  title: {
+    color: '#ffffff',
+    fontSize: height / 20,
+    position: 'absolute',
+    fontFamily: 'Poppins-Bold',
+    paddingLeft: 20,
+    top: '30%',
+  },
+  subTitle: {
+    color: '#ffffff',
+    fontSize: height / 40,
+    position: 'absolute',
+    fontFamily: 'Montserrat-Regular',
+    paddingLeft: 22,
+    opacity: 0.5,
+    top: '52%',
+  },
+  settingsIconContainer: {
+    position: 'absolute',
+    top: '10%',
+    right: '4%',
+  },
+  backArrowContainer: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    top: '10%',
+    left: '4%',
+  },
+  arrowBackIcon: {
+    width: height / 60,
+    height: height / 30,
+  },
+  backBtnText: {
+    fontFamily: 'Montserrat-Medium',
+    color: '#ff7e42',
+    fontSize: height / 30,
+    marginLeft: 10,
+  },
+  settingsIcon: {
+    width: height / 20,
+    height: height / 20,
+  },
+  compatibilityResultsContainer: {
+    position: 'absolute',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    bottom: -(height / 12),
+  },
+  leftLine: {
+    position: 'absolute',
+    // right: 20,
+    left: height / 3,
+    // alignSelf: 'center',
+    width: height / 15,
+    height: 2,
+    backgroundColor: '#856740',
+  },
+});
 
 export default class Compatibility extends Component {
+  constructor() {
+    super();
+    this.state = {
+      sign: null,
+    };
+  }
+
+  componentWillMount = async () => {
+    const sign = await AsyncStorage.getItem('sign');
+    this.setState({ sign });
+  }
+
+  userSign = () => {
+    const { sign } = this.state;
+    if (sign) {
+      return getZodiacIcon(sign);
+    }
+    return null;
+  }
+
   render() {
+    const { navigation } = this.props;
+    const goBack = () => navigation.goBack();
     return (
-      <View style={styles.container}>
-        <CircularProgress percent={65} />
-      </View>
+      <ScrollView style={styles.safeAreaView}>
+        <Image
+          style={[styles.backgroundStars]}
+          resizeMode="stretch"
+          source={require('../../../assets/img/bg-stars.png')}
+        />
+        <View style={styles.header}>
+          <Image
+            style={[styles.headerBackground]}
+            resizeMode="stretch"
+            source={require('../../../assets/img/bg-home-header.png')}
+          />
+          <TouchableOpacity onPress={goBack} style={styles.backArrowContainer}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image
+                resizeMode="cover"
+                style={styles.arrowBackIcon}
+                source={require('../../../assets/icons/arrow-left.png')}
+              />
+              <Text style={styles.backBtnText}>Back</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.compatibilityResultsContainer}>
+            <UserSignWithCircles />
+            {/* <View style={styles.leftLine} /> */}
+            <CircularProgress percent={66} />
+            {/* <View style={styles.leftLine} /> */}
+            <UserSignWithCircles />
+          </View>
+          <Text style={[styles.title]}>Compatibility</Text>
+          <Text style={styles.subTitle}>Copatibilites matters</Text>
+          <TouchableOpacity style={styles.settingsIconContainer}>
+            <Image
+              style={styles.settingsIcon}
+              source={require('../../../assets/icons/settings.png')}
+            />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     );
   }
 }
-
-const propStyle = (percent, base_degrees) => {
-  const rotateBy = base_degrees + (percent * 3.6);
-  return {
-    transform: [{ rotateZ: `${rotateBy}deg` }],
-  };
-};
-
-const renderThirdLayer = (percent) => {
-  if (percent > 50) {
-    return <View style={[styles.secondProgressLayer, propStyle((percent - 50), 45)]} />;
-  }
-  return <View style={styles.offsetLayer} />;
-};
-
-const CircularProgress = ({ percent }) => {
-  let firstProgressLayerStyle;
-  if (percent > 50) {
-    firstProgressLayerStyle = propStyle(50, -135);
-  } else {
-    firstProgressLayerStyle = propStyle(percent, -135);
-  }
-
-  return (
-    <View style={styles.container}>
-      <View style={[styles.firstProgressLayer, firstProgressLayerStyle]} />
-      {renderThirdLayer(percent)}
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    width: 200,
-    height: 200,
-    borderWidth: 20,
-    borderRadius: 100,
-    borderColor: 'grey',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  firstProgressLayer: {
-    width: 200,
-    height: 200,
-    borderWidth: 20,
-    borderRadius: 100,
-    position: 'absolute',
-    borderLeftColor: 'transparent',
-    borderBottomColor: 'transparent',
-    borderRightColor: '#3498db',
-    borderTopColor: '#3498db',
-    transform: [{ rotateZ: '-135deg' }],
-  },
-  secondProgressLayer: {
-    width: 200,
-    height: 200,
-    position: 'absolute',
-    borderWidth: 20,
-    borderRadius: 100,
-    borderLeftColor: 'transparent',
-    borderBottomColor: 'transparent',
-    borderRightColor: '#3498db',
-    borderTopColor: '#3498db',
-    transform: [{ rotateZ: '45deg' }],
-  },
-  offsetLayer: {
-    width: 200,
-    height: 200,
-    position: 'absolute',
-    borderWidth: 20,
-    borderRadius: 100,
-    borderLeftColor: 'transparent',
-    borderBottomColor: 'transparent',
-    borderRightColor: 'grey',
-    borderTopColor: 'grey',
-    transform: [{ rotateZ: '-135deg' }],
-  },
-});
