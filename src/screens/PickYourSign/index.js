@@ -10,9 +10,10 @@ import {
   AsyncStorage,
   Platform,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import ZodiacItem from '../../components/zodiacItem';
 import zodiacs from '../../../zodiacs.json';
-import ContinueButton from '../../components/buttons/continue';
+import BaseButton from '../../components/buttons';
 
 const { height } = Dimensions.get('window');
 
@@ -105,9 +106,13 @@ export default class PickYourSign extends Component {
             numColumns={3}
             columnWrapperStyle={styles.columnWrapperStyle}
           />
-          <ContinueButton onPress={this.goNext} bottom={bottomBtn} />
+          <BaseButton text="Continue" onPress={this.goNext} bottom={bottomBtn} />
         </ImageBackground>
       </View>
     );
   }
 }
+
+PickYourSign.propTypes = {
+  navigation: PropTypes.func.isRequired,
+};

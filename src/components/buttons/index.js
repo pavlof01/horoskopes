@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
 export default class Continue extends Component {
   render() {
-    const { bottom, onPress } = this.props;
+    const { bottom, onPress, text } = this.props;
     const goNext = () => onPress();
     return (
       <Animated.View style={[styles.container, { bottom }]}>
@@ -46,7 +46,7 @@ export default class Continue extends Component {
             colors={['#ffb577', '#ff7e42']}
             style={styles.linearGradient}
           >
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.buttonText}>{text}</Text>
           </LinearGradient>
         </TouchableOpacity>
       </Animated.View>

@@ -283,8 +283,6 @@ export default class Home extends Component {
       topCards,
     } = this.state;
     const { love, carrer, helth } = this.state.cardExpand;
-    /* turn on/off to show warnings */
-    console.disableYellowBox = true;
     return (
       <ScrollView style={styles.safeAreaView}>
         <View style={styles.header}>
