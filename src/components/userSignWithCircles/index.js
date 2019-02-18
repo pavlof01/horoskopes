@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, View, Dimensions, AsyncStorage,
+  StyleSheet, View, Dimensions, AsyncStorage, Text,
 } from 'react-native';
 import getZodiacIcon from '../../utils';
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   userSignContainer: {
@@ -34,6 +34,17 @@ const styles = StyleSheet.create({
     borderRadius: height / 4,
     top: -(height / 4) / 6,
   },
+  signName: {
+    position: 'absolute',
+    color: '#ffffff',
+    opacity: 0.7,
+    fontSize: height / 30,
+    fontFamily: 'Poppins-Regular',
+    alignSelf: 'center',
+    top: '200%',
+    textAlign: 'center',
+    width: width / 2,
+  },
 });
 
 export default class UserSignWithCircles extends Component {
@@ -58,11 +69,14 @@ export default class UserSignWithCircles extends Component {
   }
 
   render() {
+    const { compatibilitySign } = this.props;
+    const { sign } = this.state;
     return (
       <View style={[styles.userSignContainer]}>
         <View style={styles.circle} />
         <View style={[styles.circle, styles.two]} />
         {this.userSign()}
+        <Text style={styles.signName}>{compatibilitySign || sign}</Text>
       </View>
     );
   }

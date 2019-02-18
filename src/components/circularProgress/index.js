@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2b1f1f',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 20,
   },
   firstProgressLayer: {
     width: WIDTH,

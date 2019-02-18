@@ -15,6 +15,29 @@ import CircularProgress from '../../components/circularProgress';
 
 const { height, width } = Dimensions.get('window');
 
+/**
+ * set consts of device resolution
+ */
+const isSmall = height / width <= 1.5;
+const isSemiSmall = height / width > 1.5 && height / width <= 1.6;
+// const isMedium = height / width > 1.6 && height / width <= 1.7;
+
+/**
+ * function for detect mobile resolution
+ * and set position of line that connect
+ * both sign of compatibility
+ */
+
+const positionOfLine = () => {
+  if (isSmall) {
+    return '33.3%';
+  }
+  if (isSemiSmall) {
+    return '33%';
+  }
+  return '32.5%';
+};
+
 const styles = StyleSheet.create({
   safeAreaView: {
     backgroundColor: '#000000',
@@ -35,7 +58,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffff',
-    fontSize: height / 20,
+    fontSize: height / 25,
     position: 'absolute',
     fontFamily: 'Poppins-Bold',
     paddingLeft: 20,
@@ -86,12 +109,68 @@ const styles = StyleSheet.create({
   },
   leftLine: {
     position: 'absolute',
-    // right: 20,
-    left: height / 3,
-    // alignSelf: 'center',
-    width: height / 15,
+    left: '33%',
+    width: width / 6,
     height: 2,
-    backgroundColor: '#856740',
+    backgroundColor: '#85673f',
+    zIndex: 10,
+  },
+  rightLine: {
+    position: 'absolute',
+    right: '33%',
+    width: width / 6,
+    height: 2,
+    backgroundColor: '#85673f',
+    zIndex: 10,
+  },
+  leftLineContainer: {
+    position: 'absolute',
+    left: positionOfLine(),
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10,
+  },
+  rightLineContainer: {
+    position: 'absolute',
+    right: positionOfLine(),
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10,
+  },
+  circle: {
+    position: 'absolute',
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#ffb165',
+    zIndex: 10,
+  },
+  overview: {
+    marginTop: isSemiSmall || isSmall ? '30%' : '35%',
+    marginHorizontal: height / 20,
+    height: isSemiSmall || isSmall ? 130 : 200,
+  },
+  sectionTitle: {
+    color: '#fff',
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: height / 25,
+    height: 50,
+  },
+  sectionText: {
+    color: '#fff',
+    opacity: 0.78,
+    fontFamily: 'Poppins-Light',
+    fontSize: height / 40,
+    height: isSemiSmall || isSmall ? 150 : 220,
+  },
+  dating: {
+    marginTop: isSemiSmall || isSmall ? 60 : 30,
+    marginHorizontal: height / 20,
+    height: isSemiSmall || isSmall ? 200 : 250,
+  },
+  datingHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
@@ -144,12 +223,18 @@ export default class Compatibility extends Component {
           </TouchableOpacity>
           <View style={styles.compatibilityResultsContainer}>
             <UserSignWithCircles />
-            {/* <View style={styles.leftLine} /> */}
+            <View style={styles.leftLineContainer}>
+              <View style={styles.leftLine} />
+              <View style={styles.circle} />
+            </View>
             <CircularProgress percent={66} />
-            {/* <View style={styles.leftLine} /> */}
-            <UserSignWithCircles />
+            <View style={styles.rightLineContainer}>
+              <View style={styles.rightLine} />
+              <View style={styles.circle} />
+            </View>
+            <UserSignWithCircles compatibilitySign="Libra" />
           </View>
-          <Text style={[styles.title]}>Compatibility</Text>
+          <Text style={[styles.title]}>Compatibility Score</Text>
           <Text style={styles.subTitle}>Copatibilites matters</Text>
           <TouchableOpacity style={styles.settingsIconContainer}>
             <Image
@@ -157,6 +242,25 @@ export default class Compatibility extends Component {
               source={require('../../../assets/icons/settings.png')}
             />
           </TouchableOpacity>
+        </View>
+        <View style={styles.overview}>
+          <Text style={styles.sectionTitle}>Overview</Text>
+          <Text style={styles.sectionText}>
+            You’se likely to be on the receiving end of new, a gift or invitation and may even
+            receive news of achievement regarding one or other of the activies. You’se likely to be
+            on the receiving end of new, a gift or invitation .
+          </Text>
+        </View>
+        <View style={styles.dating}>
+          <View style={styles.datingHeader}>
+            <Text style={styles.sectionTitle}>Dating</Text>
+            <CircularProgress percent={66} />
+          </View>
+          <Text style={styles.sectionText}>
+            You’se likely to be on the receiving end of new, a gift or invitation and may even
+            receive news of achievement regarding one or other of the activies. You’se likely to be
+            on the receiving end of new, a gift or invitation .
+          </Text>
         </View>
       </ScrollView>
     );
