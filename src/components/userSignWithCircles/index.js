@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, View, Dimensions, AsyncStorage, Text,
+  StyleSheet, View, Dimensions, AsyncStorage, Text, Animated, Easing,
 } from 'react-native';
 import getZodiacIcon from '../../utils';
 
@@ -52,12 +52,34 @@ export default class UserSignWithCircles extends Component {
     super();
     this.state = {
       sign: null,
+      signScale: new Animated.Value(0),
     };
   }
 
   componentWillMount = async () => {
     const sign = await AsyncStorage.getItem('sign');
     this.setState({ sign });
+  }
+
+  componentDidMount = () => {
+    this._signsAnim();
+  }
+
+
+  _signsAnim = () => {
+    const { delayAnim } = this.props;
+    Animated.sequence([
+      Animated.timing(this.state.signScale, {
+        toValue: 1,
+        duration: 250,
+        delay: delayAnim || 0,
+      }),
+      Animated.timing(this.state.signScale, {
+        toValue: 0.8,
+        duration: 250,
+        easing: Easing.bezier(0, 0.71, 0.67, 0.47),
+      }),
+    ]).start();
   }
 
   userSign = () => {
@@ -69,15 +91,16 @@ export default class UserSignWithCircles extends Component {
   }
 
   render() {
+    const { signScale } = this.state;
     const { compatibilitySign } = this.props;
     const { sign } = this.state;
     return (
-      <View style={[styles.userSignContainer]}>
+      <Animated.View style={[styles.userSignContainer, { transform: [{ scale: signScale }] }]}>
         <View style={styles.circle} />
         <View style={[styles.circle, styles.two]} />
         {this.userSign()}
         <Text style={styles.signName}>{compatibilitySign || sign}</Text>
-      </View>
+      </Animated.View>
     );
   }
 }

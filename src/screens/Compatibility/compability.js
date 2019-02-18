@@ -8,6 +8,8 @@ import {
   Image,
   AsyncStorage,
   Dimensions,
+  Animated,
+  Easing,
 } from 'react-native';
 import getZodiacIcon from '../../utils';
 import UserSignWithCircles from '../../components/userSignWithCircles';
@@ -84,6 +86,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     top: '10%',
     left: '4%',
+  },
+  bodyBackArrowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   arrowBackIcon: {
     width: height / 60,
@@ -179,12 +185,86 @@ export default class Compatibility extends Component {
     super();
     this.state = {
       sign: null,
+      backArrowContainerTranslate: new Animated.Value(150),
+      headerTitleFade: new Animated.Value(0),
+      headerTitleTranslate: new Animated.Value(70),
+      headerSubTitleFade: new Animated.Value(0),
+      headerSubTitleTranslate: new Animated.Value(70),
+      widthOfLeftLine: new Animated.Value(0),
+      widthOfRightLine: new Animated.Value(0),
+      rightCircleScale: new Animated.Value(0),
+      leftCircleScale: new Animated.Value(0),
     };
   }
 
   componentWillMount = async () => {
     const sign = await AsyncStorage.getItem('sign');
     this.setState({ sign });
+  }
+
+  componentDidMount = () => {
+    this._backArrowContainerAnim();
+    this._headerTitlesAnim();
+    this._linesAnim();
+    this._circlesAnim();
+  }
+
+  _backArrowContainerAnim = () => {
+    Animated.timing(this.state.backArrowContainerTranslate, {
+      toValue: 0,
+      duration: 500,
+    }).start();
+  }
+
+  _headerTitlesAnim = () => {
+    Animated.parallel([
+      Animated.timing(this.state.headerTitleFade, {
+        toValue: 1,
+        duration: 500,
+      }),
+      Animated.timing(this.state.headerSubTitleFade, {
+        toValue: 1,
+        duration: 500,
+      }),
+      Animated.timing(this.state.headerTitleTranslate, {
+        toValue: 0,
+        duration: 500,
+      }),
+      Animated.timing(this.state.headerSubTitleTranslate, {
+        toValue: 0,
+        duration: 500,
+      }),
+    ]).start();
+  }
+
+  _linesAnim = () => {
+    Animated.parallel([
+      Animated.timing(this.state.widthOfLeftLine, {
+        toValue: width / 6,
+        duration: 500,
+        delay: 700,
+      }),
+      Animated.timing(this.state.widthOfRightLine, {
+        toValue: width / 6,
+        duration: 700,
+        delay: 700,
+      }),
+    ]).start();
+  }
+
+  _circlesAnim = () => {
+    Animated.parallel([
+      Animated.timing(this.state.leftCircleScale, {
+        toValue: 1,
+        duration: 250,
+        delay: 500,
+      }),
+      Animated.timing(this.state.rightCircleScale, {
+        toValue: 1,
+        duration: 250,
+        delay: 700,
+      }),
+    ]).start();
   }
 
   userSign = () => {
@@ -196,6 +276,17 @@ export default class Compatibility extends Component {
   }
 
   render() {
+    const {
+      backArrowContainerTranslate,
+      headerTitleFade,
+      headerSubTitleFade,
+      headerTitleTranslate,
+      headerSubTitleTranslate,
+      widthOfLeftLine,
+      widthOfRightLine,
+      rightCircleScale,
+      leftCircleScale,
+    } = this.state;
     const { navigation } = this.props;
     const goBack = () => navigation.goBack();
     return (
@@ -212,30 +303,45 @@ export default class Compatibility extends Component {
             source={require('../../../assets/img/bg-home-header.png')}
           />
           <TouchableOpacity onPress={goBack} style={styles.backArrowContainer}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Animated.View
+              style={[styles.bodyBackArrowContainer, { marginLeft: backArrowContainerTranslate }]}
+            >
               <Image
                 resizeMode="cover"
                 style={styles.arrowBackIcon}
                 source={require('../../../assets/icons/arrow-left.png')}
               />
               <Text style={styles.backBtnText}>Back</Text>
-            </View>
+            </Animated.View>
           </TouchableOpacity>
           <View style={styles.compatibilityResultsContainer}>
             <UserSignWithCircles />
             <View style={styles.leftLineContainer}>
-              <View style={styles.leftLine} />
-              <View style={styles.circle} />
+              <Animated.View style={[styles.leftLine, { width: widthOfLeftLine }]} />
+              <Animated.View style={[styles.circle, { transform: [{ scale: leftCircleScale }] }]} />
             </View>
             <CircularProgress percent={66} />
             <View style={styles.rightLineContainer}>
-              <View style={styles.rightLine} />
-              <View style={styles.circle} />
+              <Animated.View style={[styles.rightLine, { width: widthOfRightLine }]} />
+              <Animated.View
+                style={[styles.circle, { transform: [{ scale: rightCircleScale }] }]}
+              />
             </View>
-            <UserSignWithCircles compatibilitySign="Libra" />
+            <UserSignWithCircles delayAnim={200} compatibilitySign="Libra" />
           </View>
-          <Text style={[styles.title]}>Compatibility Score</Text>
-          <Text style={styles.subTitle}>Copatibilites matters</Text>
+          <Animated.Text
+            style={[styles.title, { opacity: headerTitleFade, marginTop: headerTitleTranslate }]}
+          >
+            Compatibility Score
+          </Animated.Text>
+          <Animated.Text
+            style={[
+              styles.subTitle,
+              { opacity: headerSubTitleFade, marginTop: headerSubTitleTranslate },
+            ]}
+          >
+            Copatibilites matters
+          </Animated.Text>
           <TouchableOpacity style={styles.settingsIconContainer}>
             <Image
               style={styles.settingsIcon}
