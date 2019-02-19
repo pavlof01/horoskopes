@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     zIndex: 90,
-    top: '30%',
+    top: '32%',
   },
   leftLine: {
     position: 'absolute',
@@ -402,7 +402,9 @@ export default class Compatibility extends Component {
               <Animated.View style={[styles.leftLine, { width: widthOfLeftLine }]} />
               <Animated.View style={[styles.circle, { transform: [{ scale: leftCircleScale }] }]} />
             </View>
-            <Animated.View style={{ opacity: circularProgressFade, top: circularProgressTop, zIndex: 80 }}>
+            <Animated.View
+              style={{ opacity: circularProgressFade, top: circularProgressTop, zIndex: 80 }}
+            >
               <CircularProgress
                 size={height / 15}
                 width={width / 70}
@@ -418,8 +420,7 @@ export default class Compatibility extends Component {
                         styles.circularProgressChildContainer,
                         { transform: [{ scale: circularProgressChildContainerScale }] },
                       ]}
-                    >
-                    </Animated.View>
+                    />
                     <Text style={styles.circularProgressChildText}>{`${fill.toFixed(0)}%`}</Text>
                   </View>
                 )}
@@ -468,7 +469,20 @@ export default class Compatibility extends Component {
         <Animated.View style={[styles.dating, { top: datingTop, opacity: datingFade }]}>
           <View style={styles.datingHeader}>
             <Text style={styles.sectionTitle}>Dating</Text>
-            <CircularProgress percent={66} />
+              <CircularProgress
+                size={height / 15}
+                width={width / 70}
+                fill={66}
+                tintColor="#fe9635"
+                backgroundColor="rgba(43, 31, 31, 0)"
+                style={{ zIndex: 50 }}
+              >
+                {fill => (
+                  <View style={styles.circularProgressChildContainer}>
+                    <Text style={styles.circularProgressChildText}>{`${fill.toFixed(0)}%`}</Text>
+                  </View>
+                )}
+              </CircularProgress>
           </View>
           <Text style={styles.sectionText}>
             You’se likely to be on the receiving end of new, a gift or invitation and may even
