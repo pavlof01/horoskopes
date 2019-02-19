@@ -113,6 +113,18 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     bottom: -(height / 12),
   },
+  circularProgressChildContainer: {
+    width: height / 20,
+    height: height / 20,
+    borderRadius: (height / 20) / 2,
+    backgroundColor: '#2b1f1f',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  circularProgressChildText: {
+    color: '#ffffff',
+    fontSize: height / 60,
+  },
   leftLine: {
     position: 'absolute',
     left: '33%',
@@ -358,7 +370,25 @@ export default class Compatibility extends Component {
               <Animated.View style={[styles.leftLine, { width: widthOfLeftLine }]} />
               <Animated.View style={[styles.circle, { transform: [{ scale: leftCircleScale }] }]} />
             </View>
-            <CircularProgress percent={66} />
+            <CircularProgress
+              size={height / 15}
+              width={width / 70}
+              fill={66}
+              rotation={0}
+              tintColor="#fe9635"
+              backgroundColor="#2b1f1f"
+              style={{ zIndex: 50 }}
+            >
+              {
+                fill => (
+                  <View style={styles.circularProgressChildContainer}>
+                    <Text style={styles.circularProgressChildText}>
+                      { `${fill}%`}
+                    </Text>
+                  </View>
+                )
+              }
+            </CircularProgress>
             <View style={styles.rightLineContainer}>
               <Animated.View style={[styles.rightLine, { width: widthOfRightLine }]} />
               <Animated.View
