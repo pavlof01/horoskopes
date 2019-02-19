@@ -114,16 +114,21 @@ const styles = StyleSheet.create({
     bottom: -(height / 12),
   },
   circularProgressChildContainer: {
-    width: height / 20,
-    height: height / 20,
-    borderRadius: (height / 20) / 2,
+    width: height / 15,
+    height: height / 15,
+    borderRadius: height / 15 / 2,
     backgroundColor: '#2b1f1f',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 15,
   },
   circularProgressChildText: {
     color: '#ffffff',
     fontSize: height / 60,
+    position: 'absolute',
+    alignSelf: 'center',
+    zIndex: 90,
+    top: '30%',
   },
   leftLine: {
     position: 'absolute',
@@ -131,7 +136,7 @@ const styles = StyleSheet.create({
     width: width / 6,
     height: 2,
     backgroundColor: '#85673f',
-    zIndex: 10,
+    zIndex: 5,
   },
   rightLine: {
     position: 'absolute',
@@ -139,21 +144,21 @@ const styles = StyleSheet.create({
     width: width / 6,
     height: 2,
     backgroundColor: '#85673f',
-    zIndex: 10,
+    zIndex: 5,
   },
   leftLineContainer: {
     position: 'absolute',
     left: positionOfLine(),
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10,
+    zIndex: 5,
   },
   rightLineContainer: {
     position: 'absolute',
     right: positionOfLine(),
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10,
+    zIndex: 5,
   },
   circle: {
     position: 'absolute',
@@ -210,6 +215,9 @@ export default class Compatibility extends Component {
       overviewFade: new Animated.Value(0),
       datingTop: new Animated.Value(150),
       datingFade: new Animated.Value(0),
+      circularProgressFade: new Animated.Value(1),
+      circularProgressTop: new Animated.Value(100),
+      circularProgressChildContainerScale: new Animated.Value(0),
     };
   }
 
@@ -224,6 +232,7 @@ export default class Compatibility extends Component {
     this._linesAnim();
     this._circlesAnim();
     this._sectionsAnim();
+    this._circularProgressAnim();
   }
 
   _backArrowContainerAnim = () => {
@@ -302,12 +311,31 @@ export default class Compatibility extends Component {
         Animated.timing(this.state.datingTop, {
           toValue: 0,
           duration: 500,
-          // delay: 50,
         }),
         Animated.timing(this.state.datingFade, {
           toValue: 1,
           duration: 500,
-          // delay: 250,
+        }),
+      ]),
+    ]).start();
+  }
+
+  _circularProgressAnim = () => {
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(this.state.circularProgressFade, {
+          toValue: 1,
+          duration: 500,
+        }),
+        Animated.timing(this.state.circularProgressTop, {
+          toValue: 0,
+          duration: 500,
+        }),
+      ]),
+      Animated.parallel([
+        Animated.timing(this.state.circularProgressChildContainerScale, {
+          toValue: 1,
+          duration: 500,
         }),
       ]),
     ]).start();
@@ -336,9 +364,13 @@ export default class Compatibility extends Component {
       overviewFade,
       datingTop,
       datingFade,
+      circularProgressChildContainerScale,
+      circularProgressTop,
+      circularProgressFade,
     } = this.state;
     const { navigation } = this.props;
     const goBack = () => navigation.goBack();
+    console.disableYellowBox = true;
     return (
       <ScrollView style={styles.safeAreaView}>
         <Image
@@ -370,32 +402,40 @@ export default class Compatibility extends Component {
               <Animated.View style={[styles.leftLine, { width: widthOfLeftLine }]} />
               <Animated.View style={[styles.circle, { transform: [{ scale: leftCircleScale }] }]} />
             </View>
-            <CircularProgress
-              size={height / 15}
-              width={width / 70}
-              fill={66}
-              rotation={0}
-              tintColor="#fe9635"
-              backgroundColor="#2b1f1f"
-              style={{ zIndex: 50 }}
-            >
-              {
-                fill => (
-                  <View style={styles.circularProgressChildContainer}>
-                    <Text style={styles.circularProgressChildText}>
-                      { `${fill}%`}
-                    </Text>
+            <Animated.View style={{ opacity: circularProgressFade, top: circularProgressTop, zIndex: 80 }}>
+              <CircularProgress
+                size={height / 15}
+                width={width / 70}
+                fill={66}
+                tintColor="#fe9635"
+                backgroundColor="rgba(43, 31, 31, 0)"
+                style={{ zIndex: 50 }}
+              >
+                {fill => (
+                  <View>
+                    <Animated.View
+                      style={[
+                        styles.circularProgressChildContainer,
+                        { transform: [{ scale: circularProgressChildContainerScale }] },
+                      ]}
+                    >
+                    </Animated.View>
+                    <Text style={styles.circularProgressChildText}>{`${fill.toFixed(0)}%`}</Text>
                   </View>
-                )
-              }
-            </CircularProgress>
+                )}
+              </CircularProgress>
+            </Animated.View>
             <View style={styles.rightLineContainer}>
               <Animated.View style={[styles.rightLine, { width: widthOfRightLine }]} />
               <Animated.View
                 style={[styles.circle, { transform: [{ scale: rightCircleScale }] }]}
               />
             </View>
-            <UserSignWithCircles delaySignNameAnim={200} delayAnim={200} compatibilitySign="Libra" />
+            <UserSignWithCircles
+              delaySignNameAnim={200}
+              delayAnim={200}
+              compatibilitySign="Libra"
+            />
           </View>
           <Animated.Text
             style={[styles.title, { opacity: headerTitleFade, marginTop: headerTitleTranslate }]}
