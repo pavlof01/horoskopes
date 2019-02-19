@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, View, Dimensions, AsyncStorage, Text, Animated, Easing,
+  StyleSheet, View, Dimensions, AsyncStorage, Animated, Easing,
 } from 'react-native';
+import PropType from 'prop-types';
 import getZodiacIcon from '../../utils';
 
 const { height, width } = Dimensions.get('window');
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: height / 30,
     fontFamily: 'Poppins-Regular',
     alignSelf: 'center',
-    top: '200%',
+    top: height / 5,
     textAlign: 'center',
     width: width / 2,
   },
@@ -53,6 +54,8 @@ export default class UserSignWithCircles extends Component {
     this.state = {
       sign: null,
       signScale: new Animated.Value(0),
+      signNameMarginTop: new Animated.Value(30),
+      signNameFade: new Animated.Value(0),
     };
   }
 
@@ -63,8 +66,8 @@ export default class UserSignWithCircles extends Component {
 
   componentDidMount = () => {
     this._signsAnim();
+    this._signNameAnim();
   }
-
 
   _signsAnim = () => {
     const { delayAnim } = this.props;
@@ -82,6 +85,22 @@ export default class UserSignWithCircles extends Component {
     ]).start();
   }
 
+  _signNameAnim = () => {
+    const { delaySignNameAnim } = this.props;
+    Animated.parallel([
+      Animated.timing(this.state.signNameMarginTop, {
+        toValue: 0,
+        duration: 500,
+        delay: delaySignNameAnim || 0,
+      }),
+      Animated.timing(this.state.signNameFade, {
+        toValue: 0.7,
+        duration: 500,
+        delay: delaySignNameAnim || 0,
+      }),
+    ]).start();
+  }
+
   userSign = () => {
     const { sign } = this.state;
     if (sign) {
@@ -91,16 +110,33 @@ export default class UserSignWithCircles extends Component {
   }
 
   render() {
-    const { signScale } = this.state;
+    const { signScale, signNameMarginTop, signNameFade } = this.state;
     const { compatibilitySign } = this.props;
     const { sign } = this.state;
     return (
-      <Animated.View style={[styles.userSignContainer, { transform: [{ scale: signScale }] }]}>
-        <View style={styles.circle} />
-        <View style={[styles.circle, styles.two]} />
-        {this.userSign()}
-        <Text style={styles.signName}>{compatibilitySign || sign}</Text>
-      </Animated.View>
+      <View>
+        <Animated.View style={[styles.userSignContainer, { transform: [{ scale: signScale }] }]}>
+          <View style={styles.circle} />
+          <View style={[styles.circle, styles.two]} />
+          {this.userSign()}
+        </Animated.View>
+        <Animated.Text
+          style={[styles.signName, { marginTop: signNameMarginTop, opacity: signNameFade }]}
+        >
+          {compatibilitySign || sign}
+        </Animated.Text>
+      </View>
     );
   }
 }
+
+UserSignWithCircles.defaultProp = {
+  compatibilitySign: null,
+  delayAnim: 0,
+};
+
+UserSignWithCircles.propTypes = {
+  compatibilitySign: PropType.string,
+  delayAnim: PropType.number,
+  delaySignNameAnim: PropType.number,
+};

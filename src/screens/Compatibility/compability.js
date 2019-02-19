@@ -9,8 +9,8 @@ import {
   AsyncStorage,
   Dimensions,
   Animated,
-  Easing,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import getZodiacIcon from '../../utils';
 import UserSignWithCircles from '../../components/userSignWithCircles';
 import CircularProgress from '../../components/circularProgress';
@@ -194,6 +194,10 @@ export default class Compatibility extends Component {
       widthOfRightLine: new Animated.Value(0),
       rightCircleScale: new Animated.Value(0),
       leftCircleScale: new Animated.Value(0),
+      overviewTop: new Animated.Value(150),
+      overviewFade: new Animated.Value(0),
+      datingTop: new Animated.Value(150),
+      datingFade: new Animated.Value(0),
     };
   }
 
@@ -207,6 +211,7 @@ export default class Compatibility extends Component {
     this._headerTitlesAnim();
     this._linesAnim();
     this._circlesAnim();
+    this._sectionsAnim();
   }
 
   _backArrowContainerAnim = () => {
@@ -267,6 +272,35 @@ export default class Compatibility extends Component {
     ]).start();
   }
 
+  _sectionsAnim = () => {
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(this.state.overviewTop, {
+          toValue: 0,
+          duration: 500,
+          delay: 250,
+        }),
+        Animated.timing(this.state.overviewFade, {
+          toValue: 1,
+          duration: 500,
+          delay: 250,
+        }),
+      ]),
+      Animated.parallel([
+        Animated.timing(this.state.datingTop, {
+          toValue: 0,
+          duration: 500,
+          // delay: 50,
+        }),
+        Animated.timing(this.state.datingFade, {
+          toValue: 1,
+          duration: 500,
+          // delay: 250,
+        }),
+      ]),
+    ]).start();
+  }
+
   userSign = () => {
     const { sign } = this.state;
     if (sign) {
@@ -286,6 +320,10 @@ export default class Compatibility extends Component {
       widthOfRightLine,
       rightCircleScale,
       leftCircleScale,
+      overviewTop,
+      overviewFade,
+      datingTop,
+      datingFade,
     } = this.state;
     const { navigation } = this.props;
     const goBack = () => navigation.goBack();
@@ -327,7 +365,7 @@ export default class Compatibility extends Component {
                 style={[styles.circle, { transform: [{ scale: rightCircleScale }] }]}
               />
             </View>
-            <UserSignWithCircles delayAnim={200} compatibilitySign="Libra" />
+            <UserSignWithCircles delaySignNameAnim={200} delayAnim={200} compatibilitySign="Libra" />
           </View>
           <Animated.Text
             style={[styles.title, { opacity: headerTitleFade, marginTop: headerTitleTranslate }]}
@@ -349,15 +387,15 @@ export default class Compatibility extends Component {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.overview}>
+        <Animated.View style={[styles.overview, { top: overviewTop, opacity: overviewFade }]}>
           <Text style={styles.sectionTitle}>Overview</Text>
           <Text style={styles.sectionText}>
             You’se likely to be on the receiving end of new, a gift or invitation and may even
             receive news of achievement regarding one or other of the activies. You’se likely to be
             on the receiving end of new, a gift or invitation .
           </Text>
-        </View>
-        <View style={styles.dating}>
+        </Animated.View>
+        <Animated.View style={[styles.dating, { top: datingTop, opacity: datingFade }]}>
           <View style={styles.datingHeader}>
             <Text style={styles.sectionTitle}>Dating</Text>
             <CircularProgress percent={66} />
@@ -367,8 +405,14 @@ export default class Compatibility extends Component {
             receive news of achievement regarding one or other of the activies. You’se likely to be
             on the receiving end of new, a gift or invitation .
           </Text>
-        </View>
+        </Animated.View>
       </ScrollView>
     );
   }
 }
+
+Compatibility.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
