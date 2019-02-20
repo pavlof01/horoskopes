@@ -41,15 +41,17 @@ const styles = StyleSheet.create({
 
 class Header extends Component {
   render() {
-    const { title, navigation } = this.props;
+    const { title, navigation, noBackArrow } = this.props;
     const goBack = () => navigation.goBack();
     return (
       <View>
         <Image style={styles.image} source={require('../../../assets/img/bg-home-header.png')} />
+        {noBackArrow || (
         <TouchableOpacity onPress={goBack} style={styles.backContainer}>
           <Image style={styles.arrow} source={require('../../../assets/icons/arrow-left.png')} />
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
+        )}
         <Text style={styles.title}>
           {title}
         </Text>
