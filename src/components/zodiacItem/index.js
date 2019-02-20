@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
 export default class ZodiacItem extends Component {
   render() {
     const {
-      data, pickSign, active, opacity,
+      data, pickSign, active, opacity, touchableOpacity,
     } = this.props;
     const onPress = () => pickSign(data.name);
     const isActive = active === data.name;
     return (
-      <TouchableOpacity onPress={onPress} style={styles.container}>
+      <TouchableOpacity activeOpacity={touchableOpacity} onPress={onPress} style={styles.container}>
         <View
           style={
             active === null
@@ -69,12 +69,20 @@ export default class ZodiacItem extends Component {
   }
 }
 
+ZodiacItem.defaultProps = {
+  pickSign: () => {},
+  touchableOpacity: 0.2,
+  opacity: 1,
+  active: null,
+};
+
 ZodiacItem.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
-  pickSign: PropTypes.func.isRequired,
+  pickSign: PropTypes.func,
   active: PropTypes.string,
   opacity: PropTypes.number,
+  touchableOpacity: PropTypes.number,
 };
