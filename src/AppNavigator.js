@@ -12,6 +12,7 @@ import Horoscopes from './screens/Horoscopes';
 import Compatibility from './screens/Compatibility';
 import Profile from './screens/Profile';
 import CompatibilityResult from './screens/Compatibility/compability';
+import PickSignByDate from './screens/PickYourSignByDate';
 
 const Main = createBottomTabNavigator({
   Home: {
@@ -51,6 +52,9 @@ const AppNavigator = createStackNavigator(
     },
     PickYourSign: {
       screen: PickYourSign,
+    },
+    PickSignByDate: {
+      screen: PickSignByDate,
     },
     Home: {
       screen: Main,

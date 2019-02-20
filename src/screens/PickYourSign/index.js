@@ -9,6 +9,7 @@ import {
   Animated,
   AsyncStorage,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ZodiacItem from '../../components/zodiacItem';
@@ -65,7 +66,9 @@ export default class PickYourSign extends Component {
         {'\n'}
         zodiac sign
       </Text>
-      <Text style={styles.idkMySign}>I dont know my sign</Text>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('PickSignByDate')}>
+        <Text style={styles.idkMySign}>I dont know my sign</Text>
+      </TouchableOpacity>
     </View>
   )
 
