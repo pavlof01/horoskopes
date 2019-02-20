@@ -57,6 +57,22 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 80,
   },
+  borderForActiveItem: {
+    position: 'absolute',
+    borderColor: '#ff7e42',
+    borderRadius: 8,
+    borderWidth: 2,
+    alignSelf: 'center',
+    bottom: -(height / 40) / 2 + 2,
+  },
+  month: {
+    width: width / 3.5,
+    height: height / 20,
+  },
+  date: {
+    width: width / 10,
+    height: height / 20,
+  },
 });
 
 export default class PickSignByDate extends Component {
@@ -124,6 +140,7 @@ export default class PickSignByDate extends Component {
           />
         </View>
         <View style={styles.carouselContainer}>
+          <View style={[styles.borderForActiveItem, styles.month]} />
           <Text style={styles.title}>Select Month</Text>
           <Carousel
             loop
@@ -136,6 +153,7 @@ export default class PickSignByDate extends Component {
           />
         </View>
         <View style={styles.carouselContainer}>
+          <View style={[styles.borderForActiveItem, styles.date]} />
           <Text style={styles.title}>Select Date</Text>
           <Carousel
             loop

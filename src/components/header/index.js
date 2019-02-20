@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Text, StyleSheet, View, Image, Dimensions,
+  Text, StyleSheet, View, Image, Dimensions, TouchableOpacity,
 } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 
 const { height } = Dimensions.get('window');
@@ -38,16 +39,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Header extends Component {
+class Header extends Component {
   render() {
-    const { title } = this.props;
+    const { title, navigation } = this.props;
+    const goBack = () => navigation.goBack();
     return (
       <View>
         <Image style={styles.image} source={require('../../../assets/img/bg-home-header.png')} />
-        <View style={styles.backContainer}>
+        <TouchableOpacity onPress={goBack} style={styles.backContainer}>
           <Image style={styles.arrow} source={require('../../../assets/icons/arrow-left.png')} />
           <Text style={styles.backText}>Back</Text>
-        </View>
+        </TouchableOpacity>
         <Text style={styles.title}>
           {title}
         </Text>
@@ -62,4 +64,7 @@ Header.defaultProps = {
 
 Header.propTypes = {
   title: PropTypes.string,
+  navigation: PropTypes.object.isRequired, // eslint-disable-line
 };
+
+export default withNavigation(Header);
