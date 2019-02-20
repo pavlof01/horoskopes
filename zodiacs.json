@@ -1,62 +1,63 @@
 [
   {
     "id": 1,
-    "name": "Aquarius",
-    "type": "air"
-  },
-  {
-    "id": 2,
-    "name": "Aries",
-    "type": "fire"
-  },
-  {
-    "id": 3,
-    "name": "Cancer",
-    "type": "water"
-  },
-  {
-    "id": 4,
     "name": "Capricorn",
     "type": "earth"
   },
   {
-    "id": 5,
-    "name": "Gemini",
+    "id": 2,
+    "name": "Aquarius",
     "type": "air"
   },
   {
-    "id": 6,
-    "name": "Leo",
-    "type": "fire"
-  },
-  {
-    "id": 7,
-    "name": "Libra",
-    "type": "air"
-  },
-  {
-    "id": 8,
+    "id": 3,
     "name": "Pisces",
     "type": "water"
   },
   {
-    "id": 9,
-    "name": "Sagittarius",
+    "id": 4,
+    "name": "Aries",
     "type": "fire"
   },
   {
-    "id": 10,
-    "name": "Scorpio",
-    "type": "water"
-  },
-  {
-    "id": 11,
+    "id": 5,
     "name": "Taurus",
     "type": "earth"
   },
   {
-    "id": 12,
+    "id": 6,
+    "name": "Gemini",
+    "type": "air"
+  },
+  {
+    "id": 7,
+    "name": "Cancer",
+    "type": "water"
+  },
+  {
+    "id": 8,
+    "name": "Leo",
+    "type": "fire"
+  },
+  {
+    "id": 9,
     "name": "Virgo",
     "type": "earth"
-  }
+  },
+  {
+    "id": 10,
+    "name": "Libra",
+    "type": "air"
+  },
+  {
+    "id": 11,
+    "name": "Scorpio",
+    "type": "water"
+  },
+  {
+    "id": 12,
+    "name": "Sagittarius",
+    "type": "fire"
+  },
+  
 ]
