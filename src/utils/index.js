@@ -96,3 +96,65 @@ const getZodiacBackground = (type) => {
       return null;
   }
 };
+
+/**
+ * Return zodiac sugn by month and day
+ *
+ * @param day
+ * @param month
+ * @return {string | null} name of zodiac sign
+ */
+export function getZodiacSign(day, month) {
+  const zodiacSigns = [
+    'Capricorn',
+    'Aquarius',
+    'Pisces',
+    'Aries',
+    'Taurus',
+    'Gemini',
+    'Cancer',
+    'Leo',
+    'Virgo',
+    'Libra',
+    'Scorpio',
+    'Sagittarius',
+  ];
+
+  if ((month === 1 && day <= 20) || (month === 12 && day >= 22)) {
+    return { name: zodiacSigns[0], id: 0 };
+  }
+  if ((month === 1 && day >= 21) || (month === 2 && day <= 18)) {
+    return { name: zodiacSigns[1], id: 1 };
+  }
+  if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
+    return { name: zodiacSigns[2], id: 2 };
+  }
+  if ((month === 3 && day >= 21) || (month === 4 && day <= 20)) {
+    return { name: zodiacSigns[3], id: 3 };
+  }
+  if ((month === 4 && day >= 21) || (month === 5 && day <= 20)) {
+    return { name: zodiacSigns[4], id: 4 };
+  }
+  if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) {
+    return { name: zodiacSigns[5], id: 5 };
+  }
+  if ((month === 6 && day >= 22) || (month === 7 && day <= 22)) {
+    return { name: zodiacSigns[6], id: 6 };
+  }
+  if ((month === 7 && day >= 23) || (month === 8 && day <= 23)) {
+    return { name: zodiacSigns[7], id: 7 };
+  }
+  if ((month === 8 && day >= 24) || (month === 9 && day <= 23)) {
+    return { name: zodiacSigns[8], id: 8 };
+  }
+  if ((month === 9 && day >= 24) || (month === 10 && day <= 23)) {
+    return { name: zodiacSigns[9], id: 9 };
+  }
+  if ((month === 10 && day >= 24) || (month === 11 && day <= 22)) {
+    return { name: zodiacSigns[10], id: 10 };
+  }
+  if ((month === 11 && day >= 23) || (month === 12 && day <= 21)) {
+    return { name: zodiacSigns[11], id: 11 };
+  }
+  return null;
+}
