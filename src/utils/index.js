@@ -21,7 +21,10 @@ const TAURUS = require('../../assets/icons/taurus.png');
 const VIRGO = require('../../assets/icons/virgo.png');
 const PISCES = require('../../assets/icons/pisces.png');
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
+export const isSmall = height / width <= 1.5;
+export const isSemiSmall = height / width > 1.5 && height / width <= 1.6;
+export const isMedium = height / width > 1.6 && height / width <= 1.7;
 
 const styles = StyleSheet.create({
   userSignContainer: {

@@ -7,12 +7,11 @@ import {
   Dimensions,
   TouchableOpacity,
   AsyncStorage,
-  ScrollView,
   Animated,
   Easing,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import getZodiacIcon from '../../utils';
+import getZodiacIcon, { isSmall, isSemiSmall } from '../../utils';
 import SignStat from '../../components/signStatistic';
 import YourDayCard from '../../components/horoskopesCard';
 
@@ -96,9 +95,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  flatList: {
-    marginTop: 30,
-    height: 50,
+  horoskopeDaysContainer: {
+    position: 'absolute',
+    zIndex: 999,
+    elevation: 3,
+    backgroundColor: '#000000',
+    paddingTop: 25,
+    paddingBottom: 5,
   },
   flatListItem: {
     color: '#c6c7cb',
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
   },
   cards: {
     margin: 10,
+    marginTop: 100,
     alignItems: 'center',
   },
 });
@@ -141,10 +145,10 @@ export default class Home extends Component {
       starsBackgroundHeaderPosition: new Animated.Value(50),
       userSignSkaleAnim: new Animated.Value(0.3),
       statAndSignNameContainer: new Animated.Value(300),
-      flatListOfHoroskopesTop: new Animated.Value(200),
-      flatListOfHoroskopesLeft: new Animated.Value(-200),
+      flatListOfHoroskopesLeft: new Animated.Value(-300),
       fadeCards: new Animated.Value(0),
       topCards: new Animated.Value(50),
+      scrollY: new Animated.Value(0),
     };
   }
 
@@ -208,11 +212,6 @@ export default class Home extends Component {
 
   _flatListOfHoroskopesAnim = () => {
     Animated.parallel([
-      Animated.timing(this.state.flatListOfHoroskopesTop, {
-        toValue: 0,
-        duration: 400,
-        easing: Easing.bezier(0, 0.71, 0.67, 0.7),
-      }),
       Animated.timing(this.state.flatListOfHoroskopesLeft, {
         toValue: 0,
         duration: 400,
@@ -234,6 +233,16 @@ export default class Home extends Component {
         easing: Easing.bezier(0, 0.71, 1, 1),
       }),
     ]).start();
+  }
+
+  getTopPositionOfHoroskopeDays = () => {
+    if (isSmall) {
+      return height / 1.45;
+    }
+    if (isSemiSmall) {
+      return height / 1.45;
+    }
+    return height / 1.5;
   }
 
   userSign = () => {
@@ -277,94 +286,112 @@ export default class Home extends Component {
       starsBackgroundHeaderPosition,
       userSignSkaleAnim,
       statAndSignNameContainer,
-      flatListOfHoroskopesTop,
       flatListOfHoroskopesLeft,
       fadeCards,
       topCards,
     } = this.state;
     const { love, carrer, helth } = this.state.cardExpand;
+    const topOfHoroskopeDays = this.state.scrollY.interpolate({
+      inputRange: [0, height / 1.7],
+      outputRange: [this.getTopPositionOfHoroskopeDays(), 0],
+      extrapolate: 'clamp',
+    });
     return (
-      <ScrollView style={styles.safeAreaView}>
-        <View style={styles.header}>
-          <Animated.Image
-            style={[styles.headerBackground, { height: headerHeightBackground }]}
-            resizeMode="stretch"
-            source={require('../../../assets/img/bg-home-header.png')}
-          />
-          <Animated.Image
-            style={[styles.headerBackgroundStars, { right: starsBackgroundHeaderPosition }]}
-            resizeMode="stretch"
-            source={require('../../../assets/img/stars-in-header.png')}
-          />
-          <Animated.View
-            style={[styles.userSignContainer, { transform: [{ scale: userSignSkaleAnim }] }]}
-          >
-            <View style={styles.circle} />
-            <View style={[styles.circle, styles.two]} />
-            {this.userSign()}
-          </Animated.View>
-          <Animated.Text style={[styles.title, { right: titlePosition }]}>My Board</Animated.Text>
-          <TouchableOpacity style={styles.settingsIconContainer}>
-            <Image
-              style={styles.settingsIcon}
-              source={require('../../../assets/icons/settings.png')}
-            />
-          </TouchableOpacity>
-        </View>
-        <Animated.View style={[styles.signUserContainer, { top: statAndSignNameContainer }]}>
-          <Text style={styles.userSignName}>{sign}</Text>
-          <View style={styles.signStatistic}>
-            <SignStat rate={2} color="#f5c970" text="Love" />
-            <SignStat rate={3} color="#52e092" text="Health" />
-            <SignStat rate={0} color="#ff637e" text="Career" />
-          </View>
-        </Animated.View>
-        <Animated.View style={{ top: flatListOfHoroskopesTop, left: flatListOfHoroskopesLeft }}>
+      <View>
+        <Animated.View
+          style={[styles.horoskopeDaysContainer, {
+            top: topOfHoroskopeDays,
+            left: flatListOfHoroskopesLeft,
+          }]}
+        >
           <FlatList
-            style={styles.flatList}
             keyExtractor={this.keyExtractor}
             data={DAYS_HOROSKOPES}
             renderItem={this.renderItem}
             horizontal
           />
         </Animated.View>
-        <Animated.View style={[styles.cards, { opacity: fadeCards, top: topCards }]}>
-          <YourDayCard
-            title="Your Day"
-            isToday
-            body="You’se likely to be on the receiving end of new, a gift or invitation and may even
+        <Animated.ScrollView
+          scrollEventThrottle={1}
+          onScroll={Animated.event([
+            {
+              nativeEvent: { contentOffset: { y: this.state.scrollY } },
+            },
+          ])}
+          style={styles.safeAreaView}
+        >
+          <View style={styles.header}>
+            <Animated.Image
+              style={[styles.headerBackground, { height: headerHeightBackground }]}
+              resizeMode="stretch"
+              source={require('../../../assets/img/bg-home-header.png')}
+            />
+            <Animated.Image
+              style={[styles.headerBackgroundStars, { right: starsBackgroundHeaderPosition }]}
+              resizeMode="stretch"
+              source={require('../../../assets/img/stars-in-header.png')}
+            />
+            <Animated.View
+              style={[styles.userSignContainer, { transform: [{ scale: userSignSkaleAnim }] }]}
+            >
+              <View style={styles.circle} />
+              <View style={[styles.circle, styles.two]} />
+              {this.userSign()}
+            </Animated.View>
+            <Animated.Text style={[styles.title, { right: titlePosition }]}>My Board</Animated.Text>
+            <TouchableOpacity style={styles.settingsIconContainer}>
+              <Image
+                style={styles.settingsIcon}
+                source={require('../../../assets/icons/settings.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <Animated.View style={[styles.signUserContainer, { top: statAndSignNameContainer }]}>
+            <Text style={styles.userSignName}>{sign}</Text>
+            <View style={styles.signStatistic}>
+              <SignStat rate={2} color="#f5c970" text="Love" />
+              <SignStat rate={3} color="#52e092" text="Health" />
+              <SignStat rate={0} color="#ff637e" text="Career" />
+            </View>
+          </Animated.View>
+          <Animated.View style={[styles.cards, { opacity: fadeCards, top: topCards }]}>
+            <YourDayCard
+              title="Your Day"
+              isToday
+              body="You’se likely to be on the receiving end of new, a gift or invitation and may even
             receive news of achievement regarding one or other of the activies. You’se likely to be
             on the receiving end of new, a gift or invitation ."
-            backgroundImage={require('../../../assets/img/bg-your-day-card.png')}
-          />
-          <YourDayCard
-            title="Your Love"
-            body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-            backgroundImage={require('../../../assets/img/bg-your-love-card.png')}
-            isExpand={love}
-            backgroundColorForSetOpacity="rgba(254, 194, 204, 0.8)"
-            onExpand={() => this.expandCard('love')}
-          />
-          <YourDayCard
-            title="Your Career"
-            body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-            backgroundImage={require('../../../assets/img/bg-your-carrer-card.png')}
-            isExpand={carrer}
-            readMoreBtnColor="#f58204"
-            backgroundColorForSetOpacity="rgba(252, 220, 178, 0.8)"
-            onExpand={() => this.expandCard('carrer')}
-          />
-          <YourDayCard
-            title="Your Helth"
-            body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-            backgroundImage={require('../../../assets/img/bg-your-helth-card.png')}
-            isExpand={helth}
-            readMoreBtnColor="#9553f1"
-            backgroundColorForSetOpacity="rgba(207, 190, 240, 0.8)"
-            onExpand={() => this.expandCard('helth')}
-          />
-        </Animated.View>
-      </ScrollView>
+              backgroundImage={require('../../../assets/img/bg-your-day-card.png')}
+            />
+            <YourDayCard
+              title="Your Love"
+              body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
+              backgroundImage={require('../../../assets/img/bg-your-love-card.png')}
+              isExpand={love}
+              backgroundColorForSetOpacity="rgba(254, 194, 204, 0.8)"
+              onExpand={() => this.expandCard('love')}
+            />
+            <YourDayCard
+              title="Your Career"
+              body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
+              backgroundImage={require('../../../assets/img/bg-your-carrer-card.png')}
+              isExpand={carrer}
+              readMoreBtnColor="#f58204"
+              backgroundColorForSetOpacity="rgba(252, 220, 178, 0.8)"
+              onExpand={() => this.expandCard('carrer')}
+            />
+            <YourDayCard
+              title="Your Helth"
+              body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
+              backgroundImage={require('../../../assets/img/bg-your-helth-card.png')}
+              isExpand={helth}
+              readMoreBtnColor="#9553f1"
+              backgroundColorForSetOpacity="rgba(207, 190, 240, 0.8)"
+              onExpand={() => this.expandCard('helth')}
+            />
+          </Animated.View>
+        </Animated.ScrollView>
+      </View>
     );
   }
 }
