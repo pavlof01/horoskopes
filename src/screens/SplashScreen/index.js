@@ -40,7 +40,7 @@ export default class SplashScreen extends Component {
   componentDidMount() {
     const { navigation } = this.props;
     /* LOADING IMITATION */
-    setTimeout(() => navigation.navigate('PickYourSign'), 2000);
+    setTimeout(() => navigation.navigate('PickYourSign'), 150);
   }
 
   render() {

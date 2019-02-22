@@ -25,6 +25,57 @@ const { height, width } = Dimensions.get('window');
 export const isSmall = height / width <= 1.5;
 export const isSemiSmall = height / width > 1.5 && height / width <= 1.6;
 export const isMedium = height / width > 1.6 && height / width <= 1.7;
+export const isSemiMedium = height / width > 1.7 && height / width <= 1.8;
+export const isLarge = height / width > 1.8 && height / width <= 2.2;
+
+/**
+ * func for set Height size depending of device resolution
+ *
+ * @param {Number} small
+ * @param {Number} semiSmall
+ * @param {Number} medium
+ * @param {Number} semiMadium
+ * @param {Number} large
+ * @param {Number} def default value
+ */
+
+export const setHeightSize = (small, semiSmall, medium, semiMadium, large, def) => {
+  if (isSmall) return rHeight(small);
+  if (isSemiSmall) return rHeight(semiSmall);
+  if (isMedium) return rHeight(medium);
+  if (isSemiMedium) return rHeight(semiMadium);
+  if (isLarge) return rHeight(large);
+  return def;
+};
+
+/**
+ * func for set Width size depending of device resolution
+ *
+ * @param {Number} small
+ * @param {Number} semiSmall
+ * @param {Number} medium
+ * @param {Number} semiMadium
+ * @param {Number} large
+ * @param {Number} def default value
+ */
+
+export const setWidthSize = (small, semiSmall, medium, semiMadium, large, def) => {
+  if (isSmall) return rWidth(small);
+  if (isSemiSmall) return rWidth(semiSmall);
+  if (isMedium) return rWidth(medium);
+  if (isSemiMedium) return rWidth(semiMadium);
+  if (isLarge) return rWidth(large);
+  return def;
+};
+
+export const rHeight = h => height * (h / 100);
+
+export const rWidth = w => width * (w / 100);
+
+export const fontSize = (f) => {
+  const tempHeight = (16 / 9) * width;
+  return Math.sqrt(Math.pow(tempHeight, 2) + Math.pow(width, 2)) * (f / 100);
+};
 
 const styles = StyleSheet.create({
   userSignContainer: {
@@ -32,16 +83,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: height / 8,
-    height: height / 8,
+    width: setHeightSize(13, 10, 10, 10, 10),
+    height: setHeightSize(13, 10, 10, 10, 10),
   },
   icon: {
-    width: height / 16,
-    height: height / 16,
+    width: setHeightSize(6, 5, 5, 5, 5),
+    height: setHeightSize(6, 5, 5, 5, 5),
     position: 'absolute',
-  },
-  bigWidthIcon: {
-    width: height / 11,
+    overflow: 'visible',
   },
 });
 
@@ -49,7 +98,7 @@ function ZodiacItem({ icon, type, bigWidth }) {
   return (
     <View style={styles.userSignContainer}>
       {getZodiacBackground(type)}
-      <Image style={[styles.icon, bigWidth ? styles.bigWidthIcon : null]} source={icon} />
+      <Image style={[styles.icon]} source={icon} />
     </View>
   );
 }

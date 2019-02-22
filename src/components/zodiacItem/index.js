@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Text, StyleSheet, View, Image, Dimensions, TouchableOpacity,
+  Text, StyleSheet, View, Image, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import getZodiacIcon from '../../utils';
-
-const { height } = Dimensions.get('window');
+import getZodiacIcon, { setHeightSize } from '../../utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +13,7 @@ const styles = StyleSheet.create({
   backgroundContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
   },
   name: {
     textAlign: 'center',
@@ -22,10 +21,10 @@ const styles = StyleSheet.create({
   },
   pickedCheckBox: {
     position: 'absolute',
-    width: height / 18,
-    height: height / 18,
-    top: 0,
-    right: 0,
+    width: setHeightSize(4, 3, 3, 3, 3),
+    height: setHeightSize(4, 3, 3, 3, 3),
+    top: setHeightSize(0, 0, 0, 0, 0),
+    right: setHeightSize(1, 2, 1.5, 1.5, 0),
   },
   opacity1: {
     opacity: 1,
