@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { fontSize } from '../../utils';
 import ZodiacItem from '../../components/zodiacItem';
 import zodiacs from '../../../zodiacs.json';
 import BaseButton from '../../components/buttons';
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   },
   flatList: {
     padding: '5%',
-    paddingTop: isAndroid ? 10 : 30,
+    paddingTop: isAndroid ? 10 : 45,
   },
   columnWrapperStyle: {
     justifyContent: 'space-between',
@@ -40,12 +41,13 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#fff',
-    fontSize: height / 22,
+    fontSize: fontSize(4),
     fontFamily: 'Poppins-Medium',
+    lineHeight: fontSize(4.6),
   },
   idkMySign: {
     color: '#ff7e42',
-    fontSize: height / 40,
+    fontSize: fontSize(2),
     fontFamily: 'Montserrat-Medium',
   },
 });

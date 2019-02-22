@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import {
   Text, StyleSheet, TouchableOpacity, Dimensions, Animated,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
+import { setHeightSize, fontSize } from '../../utils';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +15,7 @@ const styles = StyleSheet.create({
   },
   touchableOpacity: {
     width: width / 1.2,
-    height: 50,
+    height: setHeightSize(9, 8, 7, 7, 7),
     shadowColor: 'rgba(255, 132, 71, 0.39)',
     shadowOffset: { width: 9, height: 0 },
     shadowRadius: 29,
@@ -21,7 +23,7 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     width: width / 1.2,
-    height: 50,
+    height: setHeightSize(9, 8, 7, 7, 7),
     borderRadius: 51,
     justifyContent: 'center',
     alignItems: 'center',
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontFamily: 'Poppins-Medium',
-    fontSize: height / 30,
+    fontSize: fontSize(3),
   },
 });
 
@@ -53,3 +55,9 @@ export default class Continue extends Component {
     );
   }
 }
+
+Continue.propTypes = {
+  bottom: PropTypes.number,
+  onPress: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+};
