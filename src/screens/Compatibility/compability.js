@@ -11,9 +11,10 @@ import {
   Animated,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import getZodiacIcon from '../../utils';
+import getZodiacIcon, { fontSize, setWidthSize, setHeightSize } from '../../utils';
 import UserSignWithCircles from '../../components/userSignWithCircles';
 import CircularProgress from '../../components/circularProgress';
+import Header from '../../components/header';
 
 const { height, width } = Dimensions.get('window');
 
@@ -29,27 +30,12 @@ const isSemiSmall = height / width > 1.5 && height / width <= 1.6;
  * and set position of line that connect
  * both sign of compatibility
  */
-
-const positionOfLine = () => {
-  if (isSmall) {
-    return '33.3%';
-  }
-  if (isSemiSmall) {
-    return '33%';
-  }
-  return '32.5%';
-};
-
 const styles = StyleSheet.create({
   safeAreaView: {
     backgroundColor: '#000000',
   },
   header: {
     height: height / 3,
-  },
-  headerBackground: {
-    width: '100%',
-    height: '100%',
   },
   backgroundStars: {
     position: 'absolute',
@@ -60,7 +46,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffff',
-    fontSize: height / 25,
+    fontSize: fontSize(3, 3.5),
     position: 'absolute',
     fontFamily: 'Poppins-Bold',
     paddingLeft: 20,
@@ -68,7 +54,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: '#ffffff',
-    fontSize: height / 40,
+    fontSize: fontSize(2, 2.5),
     position: 'absolute',
     fontFamily: 'Montserrat-Regular',
     paddingLeft: 22,
@@ -77,33 +63,12 @@ const styles = StyleSheet.create({
   },
   settingsIconContainer: {
     position: 'absolute',
-    top: '10%',
-    right: '4%',
-  },
-  backArrowContainer: {
-    position: 'absolute',
-    flexDirection: 'row',
-    alignItems: 'center',
-    top: '10%',
-    left: '4%',
-  },
-  bodyBackArrowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  arrowBackIcon: {
-    width: height / 60,
-    height: height / 30,
-  },
-  backBtnText: {
-    fontFamily: 'Montserrat-Medium',
-    color: '#ff7e42',
-    fontSize: height / 30,
-    marginLeft: 10,
+    top: '15%',
+    right: setHeightSize(1),
   },
   settingsIcon: {
-    width: height / 20,
-    height: height / 20,
+    width: setHeightSize(5, 4),
+    height: setHeightSize(5, 4),
   },
   compatibilityResultsContainer: {
     position: 'absolute',
@@ -111,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    bottom: -(height / 12),
+    bottom: -(setHeightSize(8, 5)),
   },
   circularProgressChildContainer: {
     width: height / 15,
@@ -148,14 +113,14 @@ const styles = StyleSheet.create({
   },
   leftLineContainer: {
     position: 'absolute',
-    left: positionOfLine(),
+    left: setWidthSize(30),
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 5,
   },
   rightLineContainer: {
     position: 'absolute',
-    right: positionOfLine(),
+    right: setWidthSize(30),
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 5,
@@ -169,27 +134,27 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   overview: {
-    marginTop: isSemiSmall || isSmall ? '30%' : '35%',
+    marginTop: setHeightSize(23, 25, 25, 20, 18),
     marginHorizontal: height / 20,
-    height: isSemiSmall || isSmall ? 130 : 200,
+    height: setHeightSize(35, 30, 30, 34, 30),
   },
   sectionTitle: {
     color: '#fff',
     fontFamily: 'Poppins-SemiBold',
-    fontSize: height / 25,
-    height: 50,
+    fontSize: fontSize(3),
+    height: setHeightSize(8),
   },
   sectionText: {
     color: '#fff',
     opacity: 0.78,
     fontFamily: 'Poppins-Light',
-    fontSize: height / 40,
-    height: isSemiSmall || isSmall ? 150 : 220,
+    fontSize: fontSize(2, 2.2),
+    height: setHeightSize(40),
   },
   dating: {
-    marginTop: isSemiSmall || isSmall ? 60 : 30,
+    marginTop: setHeightSize(3),
     marginHorizontal: height / 20,
-    height: isSemiSmall || isSmall ? 200 : 250,
+    height: setHeightSize(40),
   },
   datingHeader: {
     flexDirection: 'row',
@@ -368,8 +333,6 @@ export default class Compatibility extends Component {
       circularProgressTop,
       circularProgressFade,
     } = this.state;
-    const { navigation } = this.props;
-    const goBack = () => navigation.goBack();
     console.disableYellowBox = true;
     return (
       <ScrollView style={styles.safeAreaView}>
@@ -379,23 +342,7 @@ export default class Compatibility extends Component {
           source={require('../../../assets/img/bg-stars.png')}
         />
         <View style={styles.header}>
-          <Image
-            style={[styles.headerBackground]}
-            resizeMode="stretch"
-            source={require('../../../assets/img/bg-home-header.png')}
-          />
-          <TouchableOpacity onPress={goBack} style={styles.backArrowContainer}>
-            <Animated.View
-              style={[styles.bodyBackArrowContainer, { marginLeft: backArrowContainerTranslate }]}
-            >
-              <Image
-                resizeMode="cover"
-                style={styles.arrowBackIcon}
-                source={require('../../../assets/icons/arrow-left.png')}
-              />
-              <Text style={styles.backBtnText}>Back</Text>
-            </Animated.View>
-          </TouchableOpacity>
+          <Header />
           <View style={styles.compatibilityResultsContainer}>
             <UserSignWithCircles />
             <View style={styles.leftLineContainer}>
@@ -469,20 +416,20 @@ export default class Compatibility extends Component {
         <Animated.View style={[styles.dating, { top: datingTop, opacity: datingFade }]}>
           <View style={styles.datingHeader}>
             <Text style={styles.sectionTitle}>Dating</Text>
-              <CircularProgress
-                size={height / 15}
-                width={width / 70}
-                fill={66}
-                tintColor="#fe9635"
-                backgroundColor="rgba(43, 31, 31, 0)"
-                style={{ zIndex: 50 }}
-              >
-                {fill => (
-                  <View style={styles.circularProgressChildContainer}>
-                    <Text style={styles.circularProgressChildText}>{`${fill.toFixed(0)}%`}</Text>
-                  </View>
-                )}
-              </CircularProgress>
+            <CircularProgress
+              size={height / 15}
+              width={width / 70}
+              fill={66}
+              tintColor="#fe9635"
+              backgroundColor="rgba(43, 31, 31, 0)"
+              style={{ zIndex: 50 }}
+            >
+              {fill => (
+                <View style={styles.circularProgressChildContainer}>
+                  <Text style={styles.circularProgressChildText}>{`${fill.toFixed(0)}%`}</Text>
+                </View>
+              )}
+            </CircularProgress>
           </View>
           <Text style={styles.sectionText}>
             You’se likely to be on the receiving end of new, a gift or invitation and may even

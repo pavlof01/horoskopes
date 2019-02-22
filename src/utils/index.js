@@ -39,11 +39,18 @@ export const isLarge = height / width > 1.8 && height / width <= 2.2;
  * @param {Number} def default value
  */
 
-export const setHeightSize = (small, semiSmall, medium, semiMadium, large, def) => {
+export const setHeightSize = (
+  small,
+  semiSmall = small,
+  medium = semiSmall,
+  semiMedium = medium,
+  large = semiMedium,
+  def = small,
+) => {
   if (isSmall) return rHeight(small);
   if (isSemiSmall) return rHeight(semiSmall);
   if (isMedium) return rHeight(medium);
-  if (isSemiMedium) return rHeight(semiMadium);
+  if (isSemiMedium) return rHeight(semiMedium);
   if (isLarge) return rHeight(large);
   return def;
 };
@@ -59,11 +66,18 @@ export const setHeightSize = (small, semiSmall, medium, semiMadium, large, def) 
  * @param {Number} def default value
  */
 
-export const setWidthSize = (small, semiSmall, medium, semiMadium, large, def) => {
+export const setWidthSize = (
+  small,
+  semiSmall = small,
+  medium = semiSmall,
+  semiMedium = medium,
+  large = semiMedium,
+  def = small,
+) => {
   if (isSmall) return rWidth(small);
   if (isSemiSmall) return rWidth(semiSmall);
   if (isMedium) return rWidth(medium);
-  if (isSemiMedium) return rWidth(semiMadium);
+  if (isSemiMedium) return rWidth(semiMedium);
   if (isLarge) return rWidth(large);
   return def;
 };
@@ -72,9 +86,25 @@ export const rHeight = h => height * (h / 100);
 
 export const rWidth = w => width * (w / 100);
 
-export const fontSize = (f) => {
+const fSize = (f) => {
   const tempHeight = (16 / 9) * width;
   return Math.sqrt(Math.pow(tempHeight, 2) + Math.pow(width, 2)) * (f / 100);
+};
+
+export const fontSize = (
+  small,
+  semiSmall = small,
+  medium = semiSmall,
+  semiMedium = medium,
+  large = semiMedium,
+  def = small,
+) => {
+  if (isSmall) return fSize(small);
+  if (isSemiSmall) return fSize(semiSmall);
+  if (isMedium) return fSize(medium);
+  if (isSemiMedium) return fSize(semiMedium);
+  if (isLarge) return fSize(large);
+  return def;
 };
 
 const styles = StyleSheet.create({

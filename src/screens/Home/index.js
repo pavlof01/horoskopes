@@ -11,9 +11,10 @@ import {
   Easing,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import getZodiacIcon, { isSmall, isSemiSmall } from '../../utils';
+import getZodiacIcon, { setHeightSize, fontSize } from '../../utils';
 import SignStat from '../../components/signStatistic';
 import YourDayCard from '../../components/horoskopesCard';
+import UserSignWithCircles from '../../components/userSignWithCircles';
 
 const DAYS_HOROSKOPES = ['Yesterday', 'Today', 'Tomorrow', 'Weekly', 'Monthly', 'Yearly'];
 
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
   },
   header: {
     height: height / 3,
+    marginBottom: setHeightSize(3, 5),
   },
   headerBackground: {
     width: '100%',
@@ -39,25 +41,25 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#2b2172',
-    fontSize: height / 12,
+    fontSize: fontSize(6, 8, 8, 8, 8.3),
     position: 'absolute',
     fontFamily: 'Poppins-Bold',
-    paddingLeft: 20,
+    left: '5%',
+    width: '100%',
     top: '30%',
   },
   settingsIconContainer: {
     position: 'absolute',
-    top: '10%',
+    top: '15%',
     right: '4%',
   },
   settingsIcon: {
-    width: height / 20,
-    height: height / 20,
+    width: setHeightSize(5, 4),
+    height: setHeightSize(5, 4),
   },
   userSignContainer: {
     position: 'absolute',
     alignSelf: 'center',
-    borderWidth: 1,
     borderColor: '#ffb165',
     borderRadius: height / 8,
     padding: 10,
@@ -65,29 +67,13 @@ const styles = StyleSheet.create({
     bottom: -(height / 8) / 2 - 10,
     transform: [{ scale: 1 }],
   },
-  circle: {
-    position: 'absolute',
-    alignSelf: 'center',
-    width: height / 5,
-    height: height / 5,
-    borderWidth: 1,
-    borderColor: '#22163c',
-    borderRadius: height / 5,
-    top: -(height / 5) / 10,
-  },
-  two: {
-    width: height / 4,
-    height: height / 4,
-    borderRadius: height / 4,
-    top: -(height / 4) / 6,
-  },
   signUserContainer: {
     marginTop: height / 7,
   },
   userSignName: {
     color: '#ff7e42',
     fontFamily: 'Montserrat-SemiBold',
-    fontSize: height / 15,
+    fontSize: fontSize(4, 4),
     textAlign: 'center',
     marginBottom: 10,
   },
@@ -235,16 +221,6 @@ export default class Home extends Component {
     ]).start();
   }
 
-  getTopPositionOfHoroskopeDays = () => {
-    if (isSmall) {
-      return height / 1.45;
-    }
-    if (isSemiSmall) {
-      return height / 1.45;
-    }
-    return height / 1.5;
-  }
-
   userSign = () => {
     const { sign } = this.state;
     if (sign) {
@@ -280,7 +256,6 @@ export default class Home extends Component {
 
   render() {
     const {
-      sign,
       headerHeightBackground,
       titlePosition,
       starsBackgroundHeaderPosition,
@@ -292,8 +267,8 @@ export default class Home extends Component {
     } = this.state;
     const { love, carrer, helth } = this.state.cardExpand;
     const topOfHoroskopeDays = this.state.scrollY.interpolate({
-      inputRange: [0, height / 1.7],
-      outputRange: [this.getTopPositionOfHoroskopeDays(), 0],
+      inputRange: [0, setHeightSize(58.5)],
+      outputRange: [setHeightSize(58.5), 0],
       extrapolate: 'clamp',
     });
     return (
@@ -312,7 +287,8 @@ export default class Home extends Component {
           />
         </Animated.View>
         <Animated.ScrollView
-          scrollEventThrottle={1}
+          scrollEventThrottle={16}
+          bounces={false}
           onScroll={Animated.event([
             {
               nativeEvent: { contentOffset: { y: this.state.scrollY } },
@@ -323,7 +299,7 @@ export default class Home extends Component {
           <View style={styles.header}>
             <Animated.Image
               style={[styles.headerBackground, { height: headerHeightBackground }]}
-              resizeMode="stretch"
+              resizeMode="cover"
               source={require('../../../assets/img/bg-home-header.png')}
             />
             <Animated.Image
@@ -334,9 +310,7 @@ export default class Home extends Component {
             <Animated.View
               style={[styles.userSignContainer, { transform: [{ scale: userSignSkaleAnim }] }]}
             >
-              <View style={styles.circle} />
-              <View style={[styles.circle, styles.two]} />
-              {this.userSign()}
+              <UserSignWithCircles endOpactity={1} signTextStyles={styles.userSignName} />
             </Animated.View>
             <Animated.Text style={[styles.title, { right: titlePosition }]}>My Board</Animated.Text>
             <TouchableOpacity style={styles.settingsIconContainer}>
@@ -347,7 +321,6 @@ export default class Home extends Component {
             </TouchableOpacity>
           </View>
           <Animated.View style={[styles.signUserContainer, { top: statAndSignNameContainer }]}>
-            <Text style={styles.userSignName}>{sign}</Text>
             <View style={styles.signStatistic}>
               <SignStat rate={2} color="#f5c970" text="Love" />
               <SignStat rate={3} color="#52e092" text="Health" />

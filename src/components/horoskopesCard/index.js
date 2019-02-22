@@ -3,49 +3,54 @@ import {
   Text, StyleSheet, View, Dimensions, Image, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { setHeightSize, fontSize } from '../../utils';
 
 const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
     width: width / 1.1,
-    height: height / 1.9,
+    height: setHeightSize(60, 60, 60, 60, 50),
     marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   imageBackground: {
     width: '100%',
     height: '100%',
     position: 'absolute',
-    borderRadius: 20,
   },
   text: {
     color: '#fff',
   },
   bodyCard: {
-    padding: height / 15,
+    padding: setHeightSize(5, 5, 5, 5, 4),
     position: 'relative',
   },
   date: {
     color: '#bfdaf9',
     fontFamily: 'Poppins-SemiBold',
     marginBottom: 5,
-    fontSize: height / 50,
+    fontSize: fontSize(2),
   },
   title: {
     fontFamily: 'Poppins-SemiBold',
-    marginBottom: 50,
-    fontSize: height / 35,
+    marginBottom: setHeightSize(1),
+    fontSize: fontSize(3),
   },
   mainText: {
     color: '#ffffff',
     fontFamily: 'Poppins-Light',
-    fontSize: height / 45,
+    fontSize: fontSize(2, 2, 2, 1.7, 1.8),
   },
   blackText: {
     color: '#0d0644',
   },
   notExpand: {
-    height: height / 2.2,
+    height: setHeightSize(60, 60, 60, 60, 50),
+  },
+  expand: {
+    height: setHeightSize(60, 60, 60, 60, 50),
   },
   readMoreContainer: {
     marginLeft: height / 15,
@@ -75,8 +80,8 @@ export default class Day extends Component {
       onExpand,
     } = this.props;
     return (
-      <View style={[styles.container, isExpand || isToday ? null : styles.notExpand]}>
-        <Image style={styles.imageBackground} resizeMode="stretch" source={backgroundImage} />
+      <View style={[styles.container, isExpand || isToday ? styles.expand : styles.notExpand]}>
+        <Image style={styles.imageBackground} resizeMode="contain" source={backgroundImage} />
         <View
           style={[styles.bodyCard, isExpand || isToday ? null : { paddingBottom: height / 50 }]}
         >

@@ -7,7 +7,7 @@ import Carousel from 'react-native-snap-carousel';
 import zodiacs from '../../../zodiacs.json';
 import Header from '../../components/header';
 import ZodiacItem from '../../components/zodiacItem';
-import { getZodiacSign } from '../../utils';
+import { getZodiacSign, setWidthSize, fontSize } from '../../utils';
 import Button from '../../components/buttons';
 
 const { height, width } = Dimensions.get('window');
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontFamily: 'Poppins-Regular',
     textAlign: 'center',
-    fontSize: height / 35,
+    fontSize: fontSize(2.5),
     marginBottom: 20,
   },
   renderMonthItem: {
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     bottom: -(height / 40) / 2 + 2,
   },
   month: {
-    width: width / 3.5,
+    width: setWidthSize(30, 35, 35, 35, 35),
     height: height / 20,
   },
   date: {
@@ -135,7 +135,7 @@ export default class PickSignByDate extends Component {
             data={zodiacs}
             renderItem={this.renderZodiacItem}
             sliderWidth={width}
-            itemWidth={height / 5}
+            itemWidth={setWidthSize(30)}
             inactiveSlideOpacity={0.4}
           />
         </View>

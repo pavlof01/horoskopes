@@ -3,7 +3,7 @@ import {
   Text, StyleSheet, View, Image, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import getZodiacIcon, { setHeightSize } from '../../utils';
+import getZodiacIcon, { setHeightSize, fontSize } from '../../utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,12 +18,14 @@ const styles = StyleSheet.create({
   name: {
     textAlign: 'center',
     color: '#fff',
+    fontSize: fontSize(2),
+    marginTop: 5,
   },
   pickedCheckBox: {
     position: 'absolute',
     width: setHeightSize(4, 3, 3, 3, 3),
     height: setHeightSize(4, 3, 3, 3, 3),
-    top: setHeightSize(0, 0, 0, 0, 0),
+    top: setHeightSize(0),
     right: setHeightSize(1, 2, 1.5, 1.5, 0),
   },
   opacity1: {

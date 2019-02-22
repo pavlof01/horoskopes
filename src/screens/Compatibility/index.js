@@ -10,10 +10,11 @@ import {
   Dimensions,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import getZodiacIcon from '../../utils';
+import getZodiacIcon, { setHeightSize, fontSize } from '../../utils';
 import zodiacs from '../../../zodiacs.json';
 import ZodiacItem from '../../components/zodiacItem';
 import BaseButton from '../../components/buttons';
+import UserSignWithCircles from '../../components/userSignWithCircles';
 
 const { height, width } = Dimensions.get('window');
 
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
   },
   header: {
     height: height / 3,
+    marginBottom: setHeightSize(18),
   },
   headerBackground: {
     width: '100%',
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffff',
-    fontSize: height / 20,
+    fontSize: fontSize(5),
     position: 'absolute',
     fontFamily: 'Poppins-Bold',
     paddingLeft: 20,
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: '#ffffff',
-    fontSize: height / 40,
+    fontSize: fontSize(3),
     position: 'absolute',
     fontFamily: 'Montserrat-Regular',
     paddingLeft: 22,
@@ -64,29 +66,12 @@ const styles = StyleSheet.create({
   userSignContainer: {
     position: 'absolute',
     alignSelf: 'center',
-    borderWidth: 1,
     borderColor: '#ffb165',
     borderRadius: height / 8,
     padding: 10,
     /* take height of sign icon and devide to 2 and minus padding (vertical center)  */
     bottom: -(height / 8) / 2 - 10,
     transform: [{ scale: 1 }],
-  },
-  circle: {
-    position: 'absolute',
-    alignSelf: 'center',
-    width: height / 5,
-    height: height / 5,
-    borderWidth: 1,
-    borderColor: '#22163c',
-    borderRadius: height / 5,
-    top: -(height / 5) / 10,
-  },
-  two: {
-    width: height / 4,
-    height: height / 4,
-    borderRadius: height / 4,
-    top: -(height / 4) / 6,
   },
   userSignText: {
     color: '#fff',
@@ -136,7 +121,7 @@ export default class Compability extends Component {
       <ScrollView style={styles.safeAreaView}>
         <Image
           style={[styles.backgroundStars]}
-          resizeMode="stretch"
+          resizeMode="cover"
           source={require('../../../assets/img/bg-stars.png')}
         />
         <View style={styles.header}>
@@ -145,10 +130,8 @@ export default class Compability extends Component {
             resizeMode="stretch"
             source={require('../../../assets/img/bg-home-header.png')}
           />
-          <View style={[styles.userSignContainer]}>
-            <View style={styles.circle} />
-            <View style={[styles.circle, styles.two]} />
-            {this.userSign()}
+          <View style={styles.userSignContainer}>
+            <UserSignWithCircles signTextStyles={styles.userSignText} />
           </View>
           <Text style={[styles.title]}>Compatibility</Text>
           <Text style={styles.subTitle}>Copatibilites matters</Text>
@@ -159,7 +142,6 @@ export default class Compability extends Component {
             />
           </TouchableOpacity>
         </View>
-        <Text style={styles.userSignText}>{sign}</Text>
         <Image style={styles.plusIcon} source={require('../../../assets/icons/plus.png')} />
         <View>
           <Carousel

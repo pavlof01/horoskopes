@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Text, StyleSheet, View, Dimensions,
 } from 'react-native';
+import { setHeightSize } from '../../utils';
 
 const { height } = Dimensions.get('window');
 
@@ -19,9 +20,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   rate: {
-    width: height / 60,
-    height: height / 60,
-    borderRadius: height / 30,
+    width: setHeightSize(2, 1.5),
+    height: setHeightSize(2, 1.5),
+    borderRadius: setHeightSize(2 / 2, 1.5 / 2),
     backgroundColor: '#f5c970',
     marginHorizontal: 5,
   },

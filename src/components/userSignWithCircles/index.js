@@ -3,7 +3,7 @@ import {
   StyleSheet, View, Dimensions, AsyncStorage, Animated, Easing,
 } from 'react-native';
 import PropType from 'prop-types';
-import getZodiacIcon from '../../utils';
+import getZodiacIcon, { setHeightSize } from '../../utils';
 
 const { height, width } = Dimensions.get('window');
 
@@ -15,25 +15,22 @@ const styles = StyleSheet.create({
     borderColor: '#ffb165',
     borderRadius: height / 8,
     padding: 10,
-    /* take height of sign icon and devide to 2 and minus padding (vertical center)  */
-    // bottom: -(height / 8) / 2 - 10,
     transform: [{ scale: 0.8 }],
+    justifyContent: 'center',
   },
   circle: {
     position: 'absolute',
     alignSelf: 'center',
-    width: height / 5,
-    height: height / 5,
+    width: setHeightSize(22, 20),
+    height: setHeightSize(22, 20),
     borderWidth: 1,
     borderColor: '#22163c',
-    borderRadius: height / 5,
-    top: -(height / 5) / 10,
+    borderRadius: setHeightSize(22 / 2, 20 / 2),
   },
   two: {
-    width: height / 4,
-    height: height / 4,
-    borderRadius: height / 4,
-    top: -(height / 4) / 6,
+    width: setHeightSize(26, 26),
+    height: setHeightSize(26, 26),
+    borderRadius: setHeightSize(26 / 2, 26 / 2),
   },
   signName: {
     position: 'absolute',
@@ -42,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: height / 30,
     fontFamily: 'Poppins-Regular',
     alignSelf: 'center',
-    top: height / 5,
+    top: setHeightSize(22, 18, 18, 19, 17),
     textAlign: 'center',
     width: width / 2,
   },
@@ -78,7 +75,7 @@ export default class UserSignWithCircles extends Component {
         delay: delayAnim || 0,
       }),
       Animated.timing(this.state.signScale, {
-        toValue: 0.8,
+        toValue: setHeightSize(0.15, 0.11, 0.12, 0.11, 0.08),
         duration: 250,
         easing: Easing.bezier(0, 0.71, 0.67, 0.47),
       }),
@@ -86,7 +83,7 @@ export default class UserSignWithCircles extends Component {
   }
 
   _signNameAnim = () => {
-    const { delaySignNameAnim } = this.props;
+    const { delaySignNameAnim, endOpactity } = this.props;
     Animated.parallel([
       Animated.timing(this.state.signNameMarginTop, {
         toValue: 0,
@@ -94,7 +91,7 @@ export default class UserSignWithCircles extends Component {
         delay: delaySignNameAnim || 0,
       }),
       Animated.timing(this.state.signNameFade, {
-        toValue: 0.7,
+        toValue: endOpactity || 0.7,
         duration: 500,
         delay: delaySignNameAnim || 0,
       }),
@@ -111,7 +108,7 @@ export default class UserSignWithCircles extends Component {
 
   render() {
     const { signScale, signNameMarginTop, signNameFade } = this.state;
-    const { compatibilitySign } = this.props;
+    const { compatibilitySign, signTextStyles } = this.props;
     const { sign } = this.state;
     return (
       <View>
@@ -121,7 +118,7 @@ export default class UserSignWithCircles extends Component {
           {this.userSign()}
         </Animated.View>
         <Animated.Text
-          style={[styles.signName, { marginTop: signNameMarginTop, opacity: signNameFade }]}
+          style={[styles.signName, signTextStyles, { marginTop: signNameMarginTop, opacity: signNameFade }]}
         >
           {compatibilitySign || sign}
         </Animated.Text>
