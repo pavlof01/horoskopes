@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   leftLineContainer: {
     position: 'absolute',
-    left: setWidthSize(30),
+    left: setWidthSize(30, 30, 30, 29.5, 30),
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 5,
