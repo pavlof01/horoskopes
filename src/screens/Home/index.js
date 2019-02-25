@@ -287,7 +287,7 @@ export default class Home extends Component {
           />
         </Animated.View>
         <Animated.ScrollView
-          scrollEventThrottle={16}
+          scrollEventThrottle={1}
           bounces={false}
           onScroll={Animated.event([
             {
@@ -310,7 +310,11 @@ export default class Home extends Component {
             <Animated.View
               style={[styles.userSignContainer, { transform: [{ scale: userSignSkaleAnim }] }]}
             >
-              <UserSignWithCircles endOpactity={1} signTextStyles={styles.userSignName} />
+              <UserSignWithCircles
+                scale={setHeightSize(0.17, 0.11, 0.12, 0.13, 0.1)}
+                endOpactity={1}
+                signTextStyles={styles.userSignName}
+              />
             </Animated.View>
             <Animated.Text style={[styles.title, { right: titlePosition }]}>My Board</Animated.Text>
             <TouchableOpacity style={styles.settingsIconContainer}>
@@ -334,12 +338,15 @@ export default class Home extends Component {
               body="You’se likely to be on the receiving end of new, a gift or invitation and may even
             receive news of achievement regarding one or other of the activies. You’se likely to be
             on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/bg-your-day-card.png')}
+              backgroundImage={require('../../../assets/img/today-card.png')}
+              backgroundColor="#9553f1"
             />
             <YourDayCard
               title="Your Love"
               body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/bg-your-love-card.png')}
+              backgroundImage={require('../../../assets/img/your-love-card.png')}
+              backgroundColor="#fec2cc"
+              circleColor="#fe97a8"
               isExpand={love}
               backgroundColorForSetOpacity="rgba(254, 194, 204, 0.8)"
               onExpand={() => this.expandCard('love')}
@@ -347,7 +354,9 @@ export default class Home extends Component {
             <YourDayCard
               title="Your Career"
               body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/bg-your-carrer-card.png')}
+              backgroundImage={require('../../../assets/img/your-carrer-card.png')}
+              backgroundColor="#fcdcb2"
+              circleColor="#fac47d"
               isExpand={carrer}
               readMoreBtnColor="#f58204"
               backgroundColorForSetOpacity="rgba(252, 220, 178, 0.8)"
@@ -356,7 +365,9 @@ export default class Home extends Component {
             <YourDayCard
               title="Your Helth"
               body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/bg-your-helth-card.png')}
+              backgroundImage={require('../../../assets/img/your-helth-card.png')}
+              backgroundColor="#cfbef0"
+              circleColor="#ad91e6"
               isExpand={helth}
               readMoreBtnColor="#9553f1"
               backgroundColorForSetOpacity="rgba(207, 190, 240, 0.8)"
