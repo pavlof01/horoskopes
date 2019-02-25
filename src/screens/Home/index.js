@@ -310,7 +310,11 @@ export default class Home extends Component {
             <Animated.View
               style={[styles.userSignContainer, { transform: [{ scale: userSignSkaleAnim }] }]}
             >
-              <UserSignWithCircles endOpactity={1} signTextStyles={styles.userSignName} />
+              <UserSignWithCircles
+                scale={setHeightSize(0.17, 0.11, 0.12, 0.13, 0.1)}
+                endOpactity={1}
+                signTextStyles={styles.userSignName}
+              />
             </Animated.View>
             <Animated.Text style={[styles.title, { right: titlePosition }]}>My Board</Animated.Text>
             <TouchableOpacity style={styles.settingsIconContainer}>

@@ -67,7 +67,7 @@ export default class UserSignWithCircles extends Component {
   }
 
   _signsAnim = () => {
-    const { delayAnim } = this.props;
+    const { delayAnim, scale } = this.props;
     Animated.sequence([
       Animated.timing(this.state.signScale, {
         toValue: 1,
@@ -75,7 +75,7 @@ export default class UserSignWithCircles extends Component {
         delay: delayAnim || 0,
       }),
       Animated.timing(this.state.signScale, {
-        toValue: setHeightSize(0.15, 0.11, 0.12, 0.11, 0.08),
+        toValue: scale || setHeightSize(0.15, 0.11, 0.12, 0.11, 0.08),
         duration: 250,
         easing: Easing.bezier(0, 0.71, 0.67, 0.47),
       }),
@@ -108,17 +108,21 @@ export default class UserSignWithCircles extends Component {
 
   render() {
     const { signScale, signNameMarginTop, signNameFade } = this.state;
-    const { compatibilitySign, signTextStyles } = this.props;
+    const { compatibilitySign, signTextStyles, noAnim } = this.props;
     const { sign } = this.state;
     return (
       <View>
-        <Animated.View style={[styles.userSignContainer, { transform: [{ scale: signScale }] }]}>
+        <Animated.View style={[styles.userSignContainer, noAnim ? null : { transform: [{ scale: signScale }] }]}>
           <View style={styles.circle} />
           <View style={[styles.circle, styles.two]} />
           {this.userSign()}
         </Animated.View>
         <Animated.Text
-          style={[styles.signName, signTextStyles, { marginTop: signNameMarginTop, opacity: signNameFade }]}
+          style={[
+            styles.signName,
+            signTextStyles,
+            { marginTop: signNameMarginTop, opacity: signNameFade },
+          ]}
         >
           {compatibilitySign || sign}
         </Animated.Text>
@@ -130,10 +134,18 @@ export default class UserSignWithCircles extends Component {
 UserSignWithCircles.defaultProp = {
   compatibilitySign: null,
   delayAnim: 0,
+  endOpactity: null,
+  scale: null,
+  signTextStyles: null,
+  noAnim: false,
 };
 
 UserSignWithCircles.propTypes = {
   compatibilitySign: PropType.string,
   delayAnim: PropType.number,
   delaySignNameAnim: PropType.number,
+  endOpactity: PropType.number,
+  scale: PropType.number,
+  noAnim: PropType.bool,
+  signTextStyles: PropType.object, //eslint-disable-line
 };

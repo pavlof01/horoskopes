@@ -131,7 +131,7 @@ export default class Compability extends Component {
             source={require('../../../assets/img/bg-home-header.png')}
           />
           <View style={styles.userSignContainer}>
-            <UserSignWithCircles signTextStyles={styles.userSignText} />
+            <UserSignWithCircles noAnim signTextStyles={styles.userSignText} />
           </View>
           <Text style={[styles.title]}>Compatibility</Text>
           <Text style={styles.subTitle}>Copatibilites matters</Text>

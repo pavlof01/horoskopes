@@ -135,6 +135,7 @@ Day.defaultProps = {
   readMoreBtnColor: null,
   isExpand: null,
   onExpand: null,
+  circleColor: null,
 };
 
 Day.propTypes = {
@@ -146,6 +147,6 @@ Day.propTypes = {
   readMoreBtnColor: PropTypes.string,
   backgroundColorForSetOpacity: PropTypes.string,
   backgroundColor: PropTypes.string.isRequired,
-  circleColor: PropTypes.string.isRequired,
+  circleColor: PropTypes.string,
   onExpand: PropTypes.func,
 };
