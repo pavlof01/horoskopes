@@ -9,12 +9,13 @@ import {
   AsyncStorage,
   Animated,
   Easing,
+  FlatList,
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { TabView, TabBar } from 'react-native-tab-view';
 import getZodiacIcon, { setHeightSize, fontSize } from '../../utils';
 import SignStat from '../../components/signStatistic';
-import YourDayCard from '../../components/horoskopesCard';
 import UserSignWithCircles from '../../components/userSignWithCircles';
+import Today from './TimeLineHoroskopes/today';
 
 const DAYS_HOROSKOPES = ['Yesterday', 'Today', 'Tomorrow', 'Weekly', 'Monthly', 'Yearly'];
 
@@ -81,51 +82,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  horoskopeDaysContainer: {
-    position: 'absolute',
-    zIndex: 999,
-    elevation: 3,
-    backgroundColor: '#000000',
-    paddingTop: 25,
-    paddingBottom: 5,
-  },
   flatListItem: {
     color: '#c6c7cb',
-    opacity: 0.5,
+    opacity: 0.7,
     paddingHorizontal: 15,
-    fontFamily: 'Poppins-Medium',
-    fontSize: height / 35,
+    fontFamily: 'Poppins-Light',
+    fontSize: fontSize(2.5),
   },
   isCurrentFlatListItem: {
     color: '#fff',
     opacity: 1,
-  },
-  currentFlatListItem: {
-    width: 35,
-    height: 1,
-    borderColor: '#ff7e42',
-    borderStyle: 'solid',
-    borderWidth: 2,
-    alignSelf: 'center',
-  },
-  cards: {
-    margin: 10,
-    marginTop: 100,
-    alignItems: 'center',
+    fontFamily: 'Poppins-Medium',
   },
 });
-
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
       sign: null,
       currentHoroskope: 'Today',
-      cardExpand: {
-        love: false,
-        carrer: false,
-        helth: false,
-      },
+      index: 0,
+      routes: [
+        { key: 'Yesterday', title: 'Yesterday' },
+        { key: 'Today', title: 'Today' },
+        { key: 'Tomorrow', title: 'Tomorrow' },
+        { key: 'Weekly', title: 'Weekly' },
+        { key: 'Monthly', title: 'Monthly' },
+        { key: 'Yearly', title: 'Yearly' },
+      ],
       headerHeightBackground: new Animated.Value(0),
       titlePosition: new Animated.Value(0),
       starsBackgroundHeaderPosition: new Animated.Value(50),
@@ -150,7 +134,6 @@ export default class Home extends Component {
     this._userSignAnim();
     this._userStatsAndSignNameContainerAnim();
     this._flatListOfHoroskopesAnim();
-    this._cardsAnim();
   }
 
   _headerBackgroundAnim = () => {
@@ -206,21 +189,6 @@ export default class Home extends Component {
     ]).start();
   }
 
-  _cardsAnim = () => {
-    Animated.sequence([
-      Animated.timing(this.state.fadeCards, {
-        toValue: 1,
-        duration: 150,
-        easing: Easing.bezier(0, 0.71, 1, 1),
-      }),
-      Animated.timing(this.state.topCards, {
-        toValue: 0,
-        duration: 250,
-        easing: Easing.bezier(0, 0.71, 1, 1),
-      }),
-    ]).start();
-  }
-
   userSign = () => {
     const { sign } = this.state;
     if (sign) {
@@ -237,22 +205,26 @@ export default class Home extends Component {
     return newState;
   })
 
-  renderItem = ({ item }) => {
-    const { currentHoroskope } = this.state;
-    const isCurrent = currentHoroskope === item;
-    return (
-      <TouchableOpacity onPress={() => this.setCurrentHoroskope(item)}>
-        <View>
-          <Text style={[styles.flatListItem, isCurrent ? styles.isCurrentFlatListItem : null]}>
-            {item}
-          </Text>
-          {!isCurrent || <View style={styles.currentFlatListItem} />}
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
   keyExtractor = item => `${item}`
+
+  renderScene = ({ route }) => {
+    switch (route.key) {
+      case 'Yesterday':
+        return <Today />;
+      case 'Today':
+        return <Today />;
+      case 'Tomorrow':
+        return <Today />;
+      case 'Weekly':
+        return <Today />;
+      case 'Monthly':
+        return <Today />;
+      case 'Yearly':
+        return <Today />;
+      default:
+        return null;
+    }
+  }
 
   render() {
     const {
@@ -262,10 +234,7 @@ export default class Home extends Component {
       userSignSkaleAnim,
       statAndSignNameContainer,
       flatListOfHoroskopesLeft,
-      fadeCards,
-      topCards,
     } = this.state;
-    const { love, carrer, helth } = this.state.cardExpand;
     const topOfHoroskopeDays = this.state.scrollY.interpolate({
       inputRange: [0, setHeightSize(58.5)],
       outputRange: [setHeightSize(58.5), 0],
@@ -273,7 +242,7 @@ export default class Home extends Component {
     });
     return (
       <View>
-        <Animated.View
+        {/* <Animated.View
           style={[styles.horoskopeDaysContainer, {
             top: topOfHoroskopeDays,
             left: flatListOfHoroskopesLeft,
@@ -285,7 +254,7 @@ export default class Home extends Component {
             renderItem={this.renderItem}
             horizontal
           />
-        </Animated.View>
+        </Animated.View> */}
         <Animated.ScrollView
           scrollEventThrottle={1}
           bounces={false}
@@ -331,49 +300,32 @@ export default class Home extends Component {
               <SignStat rate={0} color="#ff637e" text="Career" />
             </View>
           </Animated.View>
-          <Animated.View style={[styles.cards, { opacity: fadeCards, top: topCards }]}>
-            <YourDayCard
-              title="Your Day"
-              isToday
-              body="You’se likely to be on the receiving end of new, a gift or invitation and may even
-            receive news of achievement regarding one or other of the activies. You’se likely to be
-            on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/today-card.png')}
-              backgroundColor="#9553f1"
-            />
-            <YourDayCard
-              title="Your Love"
-              body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/your-love-card.png')}
-              backgroundColor="#fec2cc"
-              circleColor="#fe97a8"
-              isExpand={love}
-              backgroundColorForSetOpacity="rgba(254, 194, 204, 0.8)"
-              onExpand={() => this.expandCard('love')}
-            />
-            <YourDayCard
-              title="Your Career"
-              body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/your-carrer-card.png')}
-              backgroundColor="#fcdcb2"
-              circleColor="#fac47d"
-              isExpand={carrer}
-              readMoreBtnColor="#f58204"
-              backgroundColorForSetOpacity="rgba(252, 220, 178, 0.8)"
-              onExpand={() => this.expandCard('carrer')}
-            />
-            <YourDayCard
-              title="Your Helth"
-              body="You’se likely to be on the receiving end of new, a gift or invitation and may even receive news of achievement regarding one or other of the activies. You’se likely to be on the receiving end of new, a gift or invitation ."
-              backgroundImage={require('../../../assets/img/your-helth-card.png')}
-              backgroundColor="#cfbef0"
-              circleColor="#ad91e6"
-              isExpand={helth}
-              readMoreBtnColor="#9553f1"
-              backgroundColorForSetOpacity="rgba(207, 190, 240, 0.8)"
-              onExpand={() => this.expandCard('helth')}
-            />
-          </Animated.View>
+          {/* TODO:! NEED REFACTORING AND CHANGE SOME STYLES */}
+          <TabView
+            navigationState={this.state}
+            renderScene={this.renderScene}
+            onIndexChange={index => this.setState({ index })}
+            style={{ marginTop: 25 }}
+            renderTabBar={props => (
+              <TabBar
+                {...props}
+                style={{ backgroundColor: '#000', marginBottom: 25 }}
+                indicatorStyle={{
+                  backgroundColor: '#ff7e42', height: 3, borderRadius: 5, width: '8.333%', left: '4.16%',
+                }}
+                contentContainerStyle={{ backgroundColor: 'rgba(0,0,0,0,0)' }}
+                scrollEnabled
+                renderLabel={({ route, focused, color }) => (
+                  <Text style={[styles.flatListItem, focused ? styles.isCurrentFlatListItem : null]}>
+                    {route.title}
+                  </Text>
+                )}
+              />
+            )
+            }
+            initialLayout={{ width }}
+          />
+          {/* --------------- */}
         </Animated.ScrollView>
       </View>
     );
