@@ -94,6 +94,7 @@ export default class PickSignByDate extends Component {
       currentSign: 'Capricorn',
       isScrollAnimating: false,
     };
+    this.g = false;
   }
 
   renderZodiacItem = ({ item }) => (
@@ -129,12 +130,14 @@ export default class PickSignByDate extends Component {
   }
 
   detectItem = (e) => {
-    const { isScrollAnimating } = this.state;
+    console.warn(!this.g);
     const currentScroll = e.nativeEvent.contentOffset.x;
-    if (!isScrollAnimating) {
+    if (false/* !this.g */) {
       if (currentScroll > 0 && currentScroll < 120) {
+        this.g = true;
         return this.myFlatList.scrollToOffset({ offset: 10 });
       } if (currentScroll > 120 && currentScroll < 240) {
+        this.g = true;
         return this.myFlatList.scrollToOffset({ offset: 130 });
       } if (currentScroll > 240 && currentScroll < 360) {
         return this.myFlatList.scrollToOffset({ offset: 250 });
@@ -158,78 +161,42 @@ export default class PickSignByDate extends Component {
         return this.myFlatList.scrollToOffset({ offset: 1330 });
       }
     }
-    // }
-    // this.setState({ isScrollAnimating: false }, () => {
-    //   if (!isScrollAnimating) {
-    //     setTimeout(() => {
-    //       if (!isScrollAnimating) {
-    //         if (currentScroll > 0 && currentScroll < 120) {
-    //           return this.myFlatList.scrollToOffset({ offset: 10 });
-    //         } if (currentScroll > 120 && currentScroll < 240) {
-    //           return this.myFlatList.scrollToOffset({ offset: 130 });
-    //         } if (currentScroll > 240 && currentScroll < 360) {
-    //           return this.myFlatList.scrollToOffset({ offset: 250 });
-    //         } if (currentScroll > 360 && currentScroll < 480) {
-    //           return this.myFlatList.scrollToOffset({ offset: 370 });
-    //         } if (currentScroll > 480 && currentScroll < 600) {
-    //           return this.myFlatList.scrollToOffset({ offset: 490 });
-    //         } if (currentScroll > 600 && currentScroll < 720) {
-    //           return this.myFlatList.scrollToOffset({ offset: 610 });
-    //         } if (currentScroll > 720 && currentScroll < 840) {
-    //           return this.myFlatList.scrollToOffset({ offset: 730 });
-    //         } if (currentScroll > 840 && currentScroll < 960) {
-    //           return this.myFlatList.scrollToOffset({ offset: 850 });
-    //         } if (currentScroll > 960 && currentScroll < 1080) {
-    //           return this.myFlatList.scrollToOffset({ offset: 970 });
-    //         } if (currentScroll > 1080 && currentScroll < 1200) {
-    //           return this.myFlatList.scrollToOffset({ offset: 1090 });
-    //         } if (currentScroll > 1200 && currentScroll < 1320) {
-    //           return this.myFlatList.scrollToOffset({ offset: 1210 });
-    //         } if (currentScroll > 1320 && currentScroll < 1440) {
-    //           return this.myFlatList.scrollToOffset({ offset: 1330 });
-    //         }
-    //       }
-    //     }, 500);
-    //   }
-    // });
   }
 
   onMomentumScrollEnd = (e) => {
-    const { isScrollAnimating } = this.state;
     const currentScroll = e.nativeEvent.contentOffset.x;
-    this.setState({ isScrollAnimating: false }, () => {
-      if (currentScroll > 0 && currentScroll < 120) {
-        return this.myFlatList.scrollToOffset({ offset: 10 });
-      } if (currentScroll > 120 && currentScroll < 240) {
-        return this.myFlatList.scrollToOffset({ offset: 130 });
-      } if (currentScroll > 240 && currentScroll < 360) {
-        return this.myFlatList.scrollToOffset({ offset: 250 });
-      } if (currentScroll > 360 && currentScroll < 480) {
-        return this.myFlatList.scrollToOffset({ offset: 370 });
-      } if (currentScroll > 480 && currentScroll < 600) {
-        return this.myFlatList.scrollToOffset({ offset: 490 });
-      } if (currentScroll > 600 && currentScroll < 720) {
-        return this.myFlatList.scrollToOffset({ offset: 610 });
-      } if (currentScroll > 720 && currentScroll < 840) {
-        return this.myFlatList.scrollToOffset({ offset: 730 });
-      } if (currentScroll > 840 && currentScroll < 960) {
-        return this.myFlatList.scrollToOffset({ offset: 850 });
-      } if (currentScroll > 960 && currentScroll < 1080) {
-        return this.myFlatList.scrollToOffset({ offset: 970 });
-      } if (currentScroll > 1080 && currentScroll < 1200) {
-        return this.myFlatList.scrollToOffset({ offset: 1090 });
-      } if (currentScroll > 1200 && currentScroll < 1320) {
-        return this.myFlatList.scrollToOffset({ offset: 1210 });
-      } if (currentScroll > 1320 && currentScroll < 1440) {
-        return this.myFlatList.scrollToOffset({ offset: 1330 });
-      }
-    });
+    if (currentScroll > 0 && currentScroll < 120) {
+      return this.myFlatList.scrollToOffset({ offset: 10 });
+    } if (currentScroll > 120 && currentScroll < 240) {
+      return this.myFlatList.scrollToOffset({ offset: 130 });
+    } if (currentScroll > 240 && currentScroll < 360) {
+      return this.myFlatList.scrollToOffset({ offset: 250 });
+    } if (currentScroll > 360 && currentScroll < 480) {
+      return this.myFlatList.scrollToOffset({ offset: 370 });
+    } if (currentScroll > 480 && currentScroll < 600) {
+      return this.myFlatList.scrollToOffset({ offset: 490 });
+    } if (currentScroll > 600 && currentScroll < 720) {
+      return this.myFlatList.scrollToOffset({ offset: 610 });
+    } if (currentScroll > 720 && currentScroll < 840) {
+      return this.myFlatList.scrollToOffset({ offset: 730 });
+    } if (currentScroll > 840 && currentScroll < 960) {
+      return this.myFlatList.scrollToOffset({ offset: 850 });
+    } if (currentScroll > 960 && currentScroll < 1080) {
+      return this.myFlatList.scrollToOffset({ offset: 970 });
+    } if (currentScroll > 1080 && currentScroll < 1200) {
+      return this.myFlatList.scrollToOffset({ offset: 1090 });
+    } if (currentScroll > 1200 && currentScroll < 1320) {
+      return this.myFlatList.scrollToOffset({ offset: 1210 });
+    } if (currentScroll > 1320 && currentScroll < 1440) {
+      return this.myFlatList.scrollToOffset({ offset: 1330 });
+    }
   }
 
   render() {
     const { currentMonth, isScrollAnimating } = this.state;
     const detectSign = () => this.getZodiacSignByDate();
     const onContinue = () => this.goNext();
+    console.warn(this.g);
     return (
       <ScrollView style={styles.scrollView}>
         <Image style={styles.backgrundStars} source={require('../../../assets/img/bg-stars.png')} />
@@ -260,10 +227,11 @@ export default class PickSignByDate extends Component {
             horizontal
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            onMomentumScrollEnd={this.detectItem}
-            // onMomentumScrollEnd={this.onMomentumScrollEnd}
-            // onMomentumScrollBegin={() => this.setState({ isScrollAnimating: true })}
-            // onScrollEndDrag={this.detectItem}
+            // onMomentumScrollEnd={this.detectItem}
+            onScrollAnimationEnd={() => console.warn('object')}
+            onMomentumScrollEnd={this.onMomentumScrollEnd}
+            onMomentumScrollBegin={() => { this.g = true; }}
+            onScrollEndDrag={this.detectItem}
             // onScrollBeginDrag={e => console.warn(e.nativeEvent.contentOffset.x)}
             // onScroll={this.detectItem}
             // scrollEventThrottle={200}
