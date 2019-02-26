@@ -14,6 +14,8 @@ import Profile from './screens/Profile';
 import CompatibilityResult from './screens/Compatibility/compability';
 import PickSignByDate from './screens/PickYourSignByDate';
 
+import { fontSize } from './utils';
+
 const Main = createBottomTabNavigator({
   Home: {
     screen: Home,
@@ -43,6 +45,8 @@ const Main = createBottomTabNavigator({
       require('../assets/icons/bottom-menu-icon-profile.png'),
     ),
   },
+}, {
+  headerMode: 'none',
 });
 
 const AppNavigator = createStackNavigator(
@@ -52,20 +56,32 @@ const AppNavigator = createStackNavigator(
     },
     PickYourSign: {
       screen: PickYourSign,
+      navigationOptions: () => ({ header: () => null }),
     },
     PickSignByDate: {
       screen: PickSignByDate,
     },
     Home: {
       screen: Main,
+      navigationOptions: () => ({ header: () => null }),
     },
     CompatibilityResult: {
       screen: CompatibilityResult,
+
     },
   },
   {
-    headerMode: 'none ',
+    headerMode: 'float',
     initialRouteName: 'SplashScreen',
+    defaultNavigationOptions: {
+      headerTransparent: true,
+      headerTintColor: '#ff7e42',
+      headerBackTitleStyle: {
+        color: '#ff7e42',
+        fontFamily: 'Montserrat-Medium',
+        fontSize: fontSize(2),
+      },
+    },
   },
 );
 

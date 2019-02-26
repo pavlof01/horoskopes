@@ -7,7 +7,9 @@ import Carousel from 'react-native-snap-carousel';
 import zodiacs from '../../../zodiacs.json';
 import Header from '../../components/header';
 import ZodiacItem from '../../components/zodiacItem';
-import { getZodiacSign, setWidthSize, fontSize } from '../../utils';
+import {
+  getZodiacSign, setWidthSize, fontSize,
+} from '../../utils';
 import Button from '../../components/buttons';
 
 const { height, width } = Dimensions.get('window');
