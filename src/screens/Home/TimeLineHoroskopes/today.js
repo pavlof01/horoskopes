@@ -2,18 +2,17 @@ import React from 'react';
 import { Easing, StyleSheet, Animated } from 'react-native';
 import YourDayCard from '../../../components/horoskopesCard';
 
+const styles = StyleSheet.create({});
+
 export default class today extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      cardExpand: {
-        love: false,
-        carrer: false,
-        helth: false,
-      },
+      love: false,
+      carrer: false,
+      helth: false,
       fadeCards: new Animated.Value(0),
       topCards: new Animated.Value(50),
-      scrollY: new Animated.Value(0),
     };
   }
 
@@ -37,8 +36,9 @@ export default class today extends React.PureComponent {
   }
 
   render() {
-    const { love, carrer, helth } = this.state.cardExpand;
-    const { fadeCards, topCards } = this.state;
+    const {
+      love, carrer, helth, fadeCards, topCards,
+    } = this.state;
     return (
       <Animated.View style={[styles.cards, { opacity: fadeCards, top: topCards }]}>
         <YourDayCard
@@ -58,7 +58,7 @@ export default class today extends React.PureComponent {
           circleColor="#fe97a8"
           isExpand={love}
           backgroundColorForSetOpacity="rgba(254, 194, 204, 0.8)"
-          onExpand={() => this.expandCard('love')}
+          onExpand={() => this.setState({ love: true })}
         />
         <YourDayCard
           title="Your Career"
@@ -69,7 +69,7 @@ export default class today extends React.PureComponent {
           isExpand={carrer}
           readMoreBtnColor="#f58204"
           backgroundColorForSetOpacity="rgba(252, 220, 178, 0.8)"
-          onExpand={() => this.expandCard('carrer')}
+          onExpand={() => this.setState({ carrer: true })}
         />
         <YourDayCard
           title="Your Helth"
@@ -80,11 +80,9 @@ export default class today extends React.PureComponent {
           isExpand={helth}
           readMoreBtnColor="#9553f1"
           backgroundColorForSetOpacity="rgba(207, 190, 240, 0.8)"
-          onExpand={() => this.expandCard('helth')}
+          onExpand={() => this.setState({ helth: true })}
         />
       </Animated.View>
     );
   }
 }
-
-const styles = StyleSheet.create({});

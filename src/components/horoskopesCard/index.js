@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   container: {
     width: width / 1.1,
     marginHorizontal: 20,
-    marginBottom: 50,
+    marginBottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
@@ -118,7 +118,7 @@ export default class Day extends Component {
             <View
               style={[styles.readMoreContainer, { backgroundColor: backgroundColorForSetOpacity }]}
             >
-              <TouchableOpacity onPress={() => onExpand()}>
+              <TouchableOpacity onPress={onExpand}>
                 <Text style={[styles.readMore, { color: readMoreBtnColor }]}>Read More</Text>
               </TouchableOpacity>
             </View>

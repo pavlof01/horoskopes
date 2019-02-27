@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import {
-  Text,
   StyleSheet,
   View,
   Image,
   Dimensions,
   TouchableOpacity,
-  AsyncStorage,
   Animated,
   Easing,
-  FlatList,
 } from 'react-native';
-import { TabView, TabBar } from 'react-native-tab-view';
-import getZodiacIcon, { setHeightSize, fontSize } from '../../utils';
+import { Tab, Tabs, ScrollableTab } from 'native-base';
+import { setHeightSize, fontSize } from '../../utils';
 import SignStat from '../../components/signStatistic';
 import UserSignWithCircles from '../../components/userSignWithCircles';
 import Today from './TimeLineHoroskopes/today';
-
-const DAYS_HOROSKOPES = ['Yesterday', 'Today', 'Tomorrow', 'Weekly', 'Monthly', 'Yearly'];
 
 const { height, width } = Dimensions.get('window');
 
@@ -82,49 +77,46 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  flatListItem: {
+  containerTab: {
+    backgroundColor: '#000',
+    marginTop: 30,
+  },
+  tabStyle: {
+    backgroundColor: '#000',
+  },
+  activeTabStyle: {
+    backgroundColor: '#000',
+  },
+  textStyle: {
+    backgroundColor: '#000',
     color: '#c6c7cb',
     opacity: 0.7,
     paddingHorizontal: 15,
     fontFamily: 'Poppins-Light',
     fontSize: fontSize(2.5),
   },
-  isCurrentFlatListItem: {
+  activeTextStyle: {
+    backgroundColor: '#000',
     color: '#fff',
     opacity: 1,
     fontFamily: 'Poppins-Medium',
   },
 });
+
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      sign: null,
-      currentHoroskope: 'Today',
-      index: 0,
-      routes: [
-        { key: 'Yesterday', title: 'Yesterday' },
-        { key: 'Today', title: 'Today' },
-        { key: 'Tomorrow', title: 'Tomorrow' },
-        { key: 'Weekly', title: 'Weekly' },
-        { key: 'Monthly', title: 'Monthly' },
-        { key: 'Yearly', title: 'Yearly' },
-      ],
       headerHeightBackground: new Animated.Value(0),
       titlePosition: new Animated.Value(0),
       starsBackgroundHeaderPosition: new Animated.Value(50),
       userSignSkaleAnim: new Animated.Value(0.3),
       statAndSignNameContainer: new Animated.Value(300),
       flatListOfHoroskopesLeft: new Animated.Value(-300),
-      fadeCards: new Animated.Value(0),
-      topCards: new Animated.Value(50),
+      // fadeCards: new Animated.Value(0),
+      // topCards: new Animated.Value(50),
       scrollY: new Animated.Value(0),
     };
-  }
-
-  componentWillMount = async () => {
-    const sign = await AsyncStorage.getItem('sign');
-    this.setState({ sign });
   }
 
   componentDidMount = () => {
@@ -189,42 +181,7 @@ export default class Home extends Component {
     ]).start();
   }
 
-  userSign = () => {
-    const { sign } = this.state;
-    if (sign) {
-      return getZodiacIcon(sign);
-    }
-    return null;
-  }
-
-  setCurrentHoroskope = item => this.setState({ currentHoroskope: item })
-
-  expandCard = card => this.setState((state) => {
-    const newState = state;
-    newState.cardExpand[card] = true;
-    return newState;
-  })
-
   keyExtractor = item => `${item}`
-
-  renderScene = ({ route }) => {
-    switch (route.key) {
-      case 'Yesterday':
-        return <Today />;
-      case 'Today':
-        return <Today />;
-      case 'Tomorrow':
-        return <Today />;
-      case 'Weekly':
-        return <Today />;
-      case 'Monthly':
-        return <Today />;
-      case 'Yearly':
-        return <Today />;
-      default:
-        return null;
-    }
-  }
 
   render() {
     const {
@@ -233,7 +190,7 @@ export default class Home extends Component {
       starsBackgroundHeaderPosition,
       userSignSkaleAnim,
       statAndSignNameContainer,
-      flatListOfHoroskopesLeft,
+      // flatListOfHoroskopesLeft,
     } = this.state;
     const topOfHoroskopeDays = this.state.scrollY.interpolate({
       inputRange: [0, setHeightSize(58.5)],
@@ -300,32 +257,76 @@ export default class Home extends Component {
               <SignStat rate={0} color="#ff637e" text="Career" />
             </View>
           </Animated.View>
-          {/* TODO:! NEED REFACTORING AND CHANGE SOME STYLES */}
-          <TabView
-            navigationState={this.state}
-            renderScene={this.renderScene}
-            onIndexChange={index => this.setState({ index })}
-            style={{ marginTop: 25 }}
-            renderTabBar={props => (
-              <TabBar
-                {...props}
-                style={{ backgroundColor: '#000', marginBottom: 25 }}
-                indicatorStyle={{
-                  backgroundColor: '#ff7e42', height: 3, borderRadius: 5, width: '8.333%', left: '4.16%',
-                }}
-                contentContainerStyle={{ backgroundColor: 'rgba(0,0,0,0,0)' }}
-                scrollEnabled
-                renderLabel={({ route, focused, color }) => (
-                  <Text style={[styles.flatListItem, focused ? styles.isCurrentFlatListItem : null]}>
-                    {route.title}
-                  </Text>
-                )}
-              />
-            )
-            }
-            initialLayout={{ width }}
-          />
-          {/* --------------- */}
+          <Tabs
+            style={styles.containerTab}
+            tabBarUnderlineStyle={{ backgroundColor: '#ff7e42' }}
+            prerenderingSiblingsNumber={6}
+            renderTabBar={() => (
+              <ScrollableTab style={{ borderWidth: 0, backgroundColor: '#000' }} />
+            )}
+          >
+            {/* TODO:! NEED REFACTORING TABS */}
+            <Tab
+              style={styles.containerTab}
+              tabStyle={styles.tabStyle}
+              activeTabStyle={styles.activeTabStyle}
+              textStyle={styles.textStyle}
+              activeTextStyle={styles.activeTextStyle}
+              heading="Yesterday"
+            >
+              <Today />
+            </Tab>
+            <Tab
+              style={styles.containerTab}
+              tabStyle={styles.tabStyle}
+              activeTabStyle={styles.activeTabStyle}
+              textStyle={styles.textStyle}
+              activeTextStyle={styles.activeTextStyle}
+              heading="Today"
+            >
+              <Today />
+            </Tab>
+            <Tab
+              style={styles.containerTab}
+              tabStyle={styles.tabStyle}
+              activeTabStyle={styles.activeTabStyle}
+              textStyle={styles.textStyle}
+              activeTextStyle={styles.activeTextStyle}
+              heading="Tomorrow"
+            >
+              <Today />
+            </Tab>
+            <Tab
+              style={styles.containerTab}
+              tabStyle={styles.tabStyle}
+              activeTabStyle={styles.activeTabStyle}
+              textStyle={styles.textStyle}
+              activeTextStyle={styles.activeTextStyle}
+              heading="Weekly"
+            >
+              <Today />
+            </Tab>
+            <Tab
+              style={styles.containerTab}
+              tabStyle={styles.tabStyle}
+              activeTabStyle={styles.activeTabStyle}
+              textStyle={styles.textStyle}
+              activeTextStyle={styles.activeTextStyle}
+              heading="Monthly"
+            >
+              <Today />
+            </Tab>
+            <Tab
+              style={styles.containerTab}
+              tabStyle={styles.tabStyle}
+              activeTabStyle={styles.activeTabStyle}
+              textStyle={styles.textStyle}
+              activeTextStyle={styles.activeTextStyle}
+              heading="Yearly"
+            >
+              <Today />
+            </Tab>
+          </Tabs>
         </Animated.ScrollView>
       </View>
     );

@@ -167,6 +167,7 @@ export default class Compatibility extends Component {
     super();
     this.state = {
       sign: null,
+      compabilitySign: null,
       backArrowContainerTranslate: new Animated.Value(150),
       headerTitleFade: new Animated.Value(0),
       headerTitleTranslate: new Animated.Value(70),
@@ -187,8 +188,10 @@ export default class Compatibility extends Component {
   }
 
   componentWillMount = async () => {
+    const { navigation } = this.props;
     const sign = await AsyncStorage.getItem('sign');
-    this.setState({ sign });
+    const compabilitySign = navigation.getParam('compabilitySign');
+    this.setState({ sign, compabilitySign });
   }
 
   componentDidMount = () => {
@@ -316,6 +319,7 @@ export default class Compatibility extends Component {
 
   render() {
     const {
+      compabilitySign,
       backArrowContainerTranslate,
       headerTitleFade,
       headerSubTitleFade,
@@ -333,7 +337,6 @@ export default class Compatibility extends Component {
       circularProgressTop,
       circularProgressFade,
     } = this.state;
-    console.disableYellowBox = true;
     return (
       <ScrollView style={styles.safeAreaView}>
         <Image
@@ -382,7 +385,7 @@ export default class Compatibility extends Component {
             <UserSignWithCircles
               delaySignNameAnim={200}
               delayAnim={200}
-              compatibilitySign="Libra"
+              compatibilitySign={compabilitySign}
             />
           </View>
           <Animated.Text
