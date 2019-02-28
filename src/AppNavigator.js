@@ -13,6 +13,7 @@ import Compatibility from './screens/Compatibility';
 import Profile from './screens/Profile';
 import CompatibilityResult from './screens/Compatibility/compability';
 import PickSignByDate from './screens/PickYourSignByDate';
+import News from './screens/News';
 
 import { fontSize } from './utils';
 
@@ -25,7 +26,7 @@ const Main = createBottomTabNavigator({
     ),
   },
   Horoscopes: {
-    screen: Horoscopes,
+    screen: News,
     navigationOptions: createBottomBarOptions(
       'Horoscopes',
       require('../assets/icons/bottom-menu-icon-horoskopes.png'),
@@ -67,7 +68,6 @@ const AppNavigator = createStackNavigator(
     },
     CompatibilityResult: {
       screen: CompatibilityResult,
-
     },
   },
   {

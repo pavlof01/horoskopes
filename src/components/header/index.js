@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
 
 class Header extends Component {
   render() {
-    const { title } = this.props;
+    const { title, titleStyles, imageStyles } = this.props;
     return (
       <View>
-        <Image style={styles.image} source={require('../../../assets/img/bg-home-header.png')} />
-        <Text style={styles.title}>
+        <Image style={[styles.image, imageStyles]} source={require('../../../assets/img/bg-home-header.png')} />
+        <Text style={[styles.title, titleStyles]}>
           {title}
         </Text>
       </View>
@@ -38,6 +38,8 @@ class Header extends Component {
 
 Header.propTypes = {
   title: PropTypes.string,
+  titleStyles: PropTypes.object, //eslint-disable-line
+  imageStyles: PropTypes.object, //eslint-disable-line
 };
 
 export default Header;
