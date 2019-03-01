@@ -100,10 +100,8 @@ export default class UserSignWithCircles extends Component {
 
   userSign = () => {
     const { sign } = this.state;
-    if (sign) {
-      return getZodiacIcon(sign);
-    }
-    return null;
+    const { compatibilitySign } = this.props;
+    return getZodiacIcon(compatibilitySign || sign);
   }
 
   render() {

@@ -92,6 +92,7 @@ export default class Compability extends Component {
     super();
     this.state = {
       sign: null,
+      currentItemIndex: 0,
     };
   }
 
@@ -109,8 +110,11 @@ export default class Compability extends Component {
   }
 
   checkCompatibility = async () => {
-    // await AsyncStorage.setItem('compability', this._carousel.currentIndex);
-    this.props.navigation.navigate('CompatibilityResult');
+    const { currentItemIndex } = this.state;
+    await AsyncStorage.setItem('compabilitySign', zodiacs[currentItemIndex].name);
+    this.props.navigation.navigate('CompatibilityResult', {
+      compabilitySign: zodiacs[currentItemIndex].name,
+    });
   }
 
   renderItem = ({ item }) => <ZodiacItem opacity={1} pickSign={() => {}} active="" data={item} />
@@ -154,7 +158,7 @@ export default class Compability extends Component {
             sliderWidth={width}
             itemWidth={height / 6}
             inactiveSlideOpacity={0.4}
-            // onSnapToItem={index => console.warn(index)}
+            onSnapToItem={currentItemIndex => this.setState({ currentItemIndex })}
           />
         </View>
         <View style={{ height: 50 }}>
