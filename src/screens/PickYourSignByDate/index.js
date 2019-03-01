@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import {
-  Text, StyleSheet, View, ScrollView, Image, Dimensions, AsyncStorage, FlatList,
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+  Image,
+  Dimensions,
+  AsyncStorage,
+  FlatList,
+  Platform,
 } from 'react-native';
 import ProptTypes from 'prop-types';
 import Carousel from 'react-native-snap-carousel';
 import zodiacs from '../../../zodiacs.json';
 import Header from '../../components/header';
 import ZodiacItem from '../../components/zodiacItem';
-import {
-  getZodiacSign, setWidthSize, fontSize,
-} from '../../utils';
+import { getZodiacSign, setWidthSize, fontSize } from '../../utils';
 import Button from '../../components/buttons';
 
 const { height, width } = Dimensions.get('window');
@@ -56,6 +62,12 @@ const styles = StyleSheet.create({
     fontSize: height / 40,
     width: 120,
   },
+  renderDateItem: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: height / 40,
+    width: 50,
+  },
   btnContainer: {
     marginTop: 30,
     height: 80,
@@ -94,20 +106,14 @@ export default class PickSignByDate extends Component {
       currentMonth: 1,
       currentDate: 1,
       currentSign: 'Capricorn',
-      isScrollAnimating: false,
     };
-    this.g = false;
   }
 
-  renderZodiacItem = ({ item }) => (
-    <ZodiacItem opacity={1} touchableOpacity={1} data={item} />
-  )
+  renderZodiacItem = ({ item }) => <ZodiacItem opacity={1} touchableOpacity={1} data={item} />
 
-  renderMonthItem = ({ item }) => (
-    <Text style={styles.renderMonthItem}>{item.toUpperCase()}</Text>
-  )
+  renderMonthItem = ({ item }) => <Text style={styles.renderMonthItem}>{item.toUpperCase()}</Text>
 
-  renderDaysOfMonthItem = ({ item }) => <Text style={styles.renderMonthItem}>{item}</Text>
+  renderDaysOfMonthItem = ({ item }) => <Text style={styles.renderDateItem}>{item}</Text>
 
   getDaysOfMonth = (month) => {
     const daysInMonth = new Date(2019, month, 0).getDate();
@@ -131,74 +137,146 @@ export default class PickSignByDate extends Component {
     this.props.navigation.navigate('Home');
   }
 
-  detectItem = (e) => {
-    console.warn(!this.g);
-    const currentScroll = e.nativeEvent.contentOffset.x;
-    if (false/* !this.g */) {
-      if (currentScroll > 0 && currentScroll < 120) {
-        this.g = true;
-        return this.myFlatList.scrollToOffset({ offset: 10 });
-      } if (currentScroll > 120 && currentScroll < 240) {
-        this.g = true;
-        return this.myFlatList.scrollToOffset({ offset: 130 });
-      } if (currentScroll > 240 && currentScroll < 360) {
-        return this.myFlatList.scrollToOffset({ offset: 250 });
-      } if (currentScroll > 360 && currentScroll < 480) {
-        return this.myFlatList.scrollToOffset({ offset: 370 });
-      } if (currentScroll > 480 && currentScroll < 600) {
-        return this.myFlatList.scrollToOffset({ offset: 490 });
-      } if (currentScroll > 600 && currentScroll < 720) {
-        return this.myFlatList.scrollToOffset({ offset: 610 });
-      } if (currentScroll > 720 && currentScroll < 840) {
-        return this.myFlatList.scrollToOffset({ offset: 730 });
-      } if (currentScroll > 840 && currentScroll < 960) {
-        return this.myFlatList.scrollToOffset({ offset: 850 });
-      } if (currentScroll > 960 && currentScroll < 1080) {
-        return this.myFlatList.scrollToOffset({ offset: 970 });
-      } if (currentScroll > 1080 && currentScroll < 1200) {
-        return this.myFlatList.scrollToOffset({ offset: 1090 });
-      } if (currentScroll > 1200 && currentScroll < 1320) {
-        return this.myFlatList.scrollToOffset({ offset: 1210 });
-      } if (currentScroll > 1320 && currentScroll < 1440) {
-        return this.myFlatList.scrollToOffset({ offset: 1330 });
+  /**
+   * TODO:! NEED REFACTORING!!!!
+   */
+
+  _scrollFix = (e) => {
+    let x = 0;
+    const h = 120; // itemHeight;
+    if (e.nativeEvent.contentOffset) {
+      x = e.nativeEvent.contentOffset.x;
+    }
+    const selectedIndex = Math.round(x / h);
+    const _y = selectedIndex * h;
+    if (_y !== x) {
+      if (Platform.OS === 'ios') {
+        this.isScrollTo = true;
       }
+      this.month.scrollToIndex({ index: selectedIndex, viewPosition: 0.5 });
+      this.setState({ currentMonth: selectedIndex + 1 }, () => this.getZodiacSignByDate());
+    }
+    if (this.state.currentMonth === selectedIndex) {
+      return null;
+    }
+    return null;
+  }
+
+  _onScrollBeginDrag = () => {
+    this.dragStarted = true;
+    if (Platform.OS === 'ios') {
+      this.isScrollTo = false;
+    }
+    this.timer && clearTimeout(this.timer);
+  }
+
+  _onScrollEndDrag = (e) => {
+    this.dragStarted = false;
+    const _e = {
+      nativeEvent: {
+        contentOffset: {
+          x: e.nativeEvent.contentOffset.x,
+        },
+      },
+    };
+    this.timer && clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      if (!this.momentumStarted && !this.dragStarted) {
+        this._scrollFix(_e, 'timeout');
+      }
+    }, 10);
+  }
+
+  _onMomentumScrollBegin = (e) => {
+    this.momentumStarted = true;
+    this.timer && clearTimeout(this.timer);
+  }
+
+  _onMomentumScrollEnd = (e) => {
+    this.momentumStarted = false;
+    if (!this.isScrollTo && !this.momentumStarted && !this.dragStarted) {
+      this._scrollFix(e);
     }
   }
 
-  onMomentumScrollEnd = (e) => {
-    const currentScroll = e.nativeEvent.contentOffset.x;
-    if (currentScroll > 0 && currentScroll < 120) {
-      return this.myFlatList.scrollToOffset({ offset: 10 });
-    } if (currentScroll > 120 && currentScroll < 240) {
-      return this.myFlatList.scrollToOffset({ offset: 130 });
-    } if (currentScroll > 240 && currentScroll < 360) {
-      return this.myFlatList.scrollToOffset({ offset: 250 });
-    } if (currentScroll > 360 && currentScroll < 480) {
-      return this.myFlatList.scrollToOffset({ offset: 370 });
-    } if (currentScroll > 480 && currentScroll < 600) {
-      return this.myFlatList.scrollToOffset({ offset: 490 });
-    } if (currentScroll > 600 && currentScroll < 720) {
-      return this.myFlatList.scrollToOffset({ offset: 610 });
-    } if (currentScroll > 720 && currentScroll < 840) {
-      return this.myFlatList.scrollToOffset({ offset: 730 });
-    } if (currentScroll > 840 && currentScroll < 960) {
-      return this.myFlatList.scrollToOffset({ offset: 850 });
-    } if (currentScroll > 960 && currentScroll < 1080) {
-      return this.myFlatList.scrollToOffset({ offset: 970 });
-    } if (currentScroll > 1080 && currentScroll < 1200) {
-      return this.myFlatList.scrollToOffset({ offset: 1090 });
-    } if (currentScroll > 1200 && currentScroll < 1320) {
-      return this.myFlatList.scrollToOffset({ offset: 1210 });
-    } if (currentScroll > 1320 && currentScroll < 1440) {
-      return this.myFlatList.scrollToOffset({ offset: 1330 });
+  _scrollFixDate = (e) => {
+    let x = 0;
+    const h = 50; // itemHeight;
+    if (e.nativeEvent.contentOffset) {
+      x = e.nativeEvent.contentOffset.x;
+    }
+    const selectedIndex = Math.round(x / h);
+    const _y = selectedIndex * h;
+    if (_y !== x) {
+      if (Platform.OS === 'ios') {
+        this.isScrollToDate = true;
+      }
+      this.date.scrollToIndex({ index: selectedIndex, viewPosition: 0.5 });
+      this.setState({ currentDate: selectedIndex + 1 }, () => this.getZodiacSignByDate());
+    }
+    if (this.state.currentDate === selectedIndex) {
+      return null;
+    }
+    return null;
+  }
+
+
+  _onScrollBeginDragDate = () => {
+    this.dragStartedDate = true;
+    if (Platform.OS === 'ios') {
+      this.isScrollToDate = false;
+    }
+    this.timerDate && clearTimeout(this.timerDate);
+  }
+
+  _onScrollEndDragDate = (e) => {
+    this.dragStartedDate = false;
+    const _e = {
+      nativeEvent: {
+        contentOffset: {
+          x: e.nativeEvent.contentOffset.x,
+        },
+      },
+    };
+    this.timerDate && clearTimeout(this.timerDate);
+    this.timerDate = setTimeout(() => {
+      if (!this.momentumStartedDate && !this.dragStartedDate) {
+        this._scrollFixDate(_e, 'timeout');
+      }
+    }, 10);
+  }
+
+  _onMomentumScrollBeginDate = (e) => {
+    this.momentumStartedDate = true;
+    this.timerDate && clearTimeout(this.timerDate);
+  }
+
+  _onMomentumScrollEndDate = (e) => {
+    this.momentumStartedDate = false;
+    if (!this.isScrollToDate && !this.momentumStartedDate && !this.dragStartedDate) {
+      this._scrollFixDate(e);
     }
   }
+
+  /* *********** */
+
+  // scrollToIndex = (ind) => {
+  //   this.setState({
+  //     selectedIndex: ind,
+  //   });
+  //   // const y = this.itemHeight * ind;
+  //   this.sview.scrollToIndex({ index: 3, viewPosition: 0.5 });
+  // }
+
+  // getSelected = () => {
+  //   const selectedIndex = this.state.selectedIndex;
+  //   const selectedValue = this.props.dataSource[selectedIndex];
+  //   return selectedValue;
+  // }
 
   render() {
-    const { currentMonth, isScrollAnimating } = this.state;
-    const detectSign = () => this.getZodiacSignByDate();
+    const { currentMonth } = this.state;
     const onContinue = () => this.goNext();
-    console.warn(this.g);
     return (
       <ScrollView style={styles.scrollView}>
         <Image style={styles.backgrundStars} source={require('../../../assets/img/bg-stars.png')} />
@@ -221,44 +299,36 @@ export default class PickSignByDate extends Component {
           <View style={[styles.borderForActiveItem, styles.month]} />
           <Text style={styles.title}>Select Month</Text>
           <FlatList
-            contentContainerStyle={{ paddingHorizontal: width / 2 - 50 }}
-            ref={list => this.myFlatList = list}
+            contentContainerStyle={{ paddingHorizontal: width / 2 - 60 }}
+            ref={(month) => {
+              this.month = month;
+            }}
             data={MONTHS}
-            // renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
             renderItem={this.renderMonthItem}
             horizontal
             showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            // onMomentumScrollEnd={this.detectItem}
-            onScrollAnimationEnd={() => console.warn('object')}
-            onMomentumScrollEnd={this.onMomentumScrollEnd}
-            onMomentumScrollBegin={() => { this.g = true; }}
-            onScrollEndDrag={this.detectItem}
-            // onScrollBeginDrag={e => console.warn(e.nativeEvent.contentOffset.x)}
-            // onScroll={this.detectItem}
-            // scrollEventThrottle={200}
+            onMomentumScrollEnd={this._onMomentumScrollEnd}
+            onMomentumScrollBegin={this._onMomentumScrollBegin}
+            onScrollEndDrag={this._onScrollEndDrag}
+            onScrollBeginDrag={this._onScrollBeginDrag}
           />
-          {/* <Carousel
-            loop
-            data={MONTHS}
-            renderItem={this.renderMonthItem}
-            sliderWidth={width}
-            itemWidth={height / 6}
-            inactiveSlideOpacity={0.4}
-            onSnapToItem={index => this.setState({ currentMonth: index + 1 }, () => detectSign())}
-          /> */}
         </View>
         <View style={styles.carouselContainer}>
           <View style={[styles.borderForActiveItem, styles.date]} />
           <Text style={styles.title}>Select Date</Text>
-          <Carousel
-            loop
+          <FlatList
+            contentContainerStyle={{ paddingHorizontal: width / 2 - 25 }}
+            ref={(date) => {
+              this.date = date;
+            }}
             data={this.getDaysOfMonth(currentMonth)}
             renderItem={this.renderDaysOfMonthItem}
-            sliderWidth={width}
-            itemWidth={height / 12}
-            inactiveSlideOpacity={0.4}
-            onSnapToItem={index => this.setState({ currentDate: index + 1 }, () => detectSign())}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            onMomentumScrollEnd={this._onMomentumScrollEndDate}
+            onMomentumScrollBegin={this._onMomentumScrollBeginDate}
+            onScrollEndDrag={this._onScrollEndDragDate}
+            onScrollBeginDrag={this._onScrollBeginDragDate}
           />
         </View>
         <View style={styles.btnContainer}>
