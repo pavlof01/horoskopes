@@ -101,6 +101,10 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * TODO:! ALL SCREEN NEED SOME REFACTORING
+ */
+
 export default class News extends Component {
   render() {
     return (
@@ -257,7 +261,7 @@ export default class News extends Component {
         </View>
         <View style={styles.recommendContainer}>
           <Text style={styles.recommendTitle}>Recommend</Text>
-          <ScrollView>
+          <ScrollView style={{ height: 320 }}>
             <View style={styles.recommendItemContainer}>
               <Image
                 resizeMode="cover"
